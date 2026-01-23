@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Listing</title>
+  <meta name="description" content="Vacancy listing details." />
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; line-height: 1.45; }
+    header { padding: 18px 16px; border-bottom: 1px solid rgba(127,127,127,.35); display:flex; gap:12px; align-items:center; flex-wrap: wrap; }
+    header a { text-decoration:none; }
+    header a:hover { text-decoration: underline; }
+    main { padding: 16px; max-width: 1000px; margin: 0 auto; }
+    h1 { margin: 10px 0 6px; font-size: 22px; }
+    .muted { opacity: .8; }
+    .notice { margin: 12px 0; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(127,127,127,.35); }
+    .error { border-color: rgba(220,60,60,.6); }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 12px; }
+    .card { border: 1px solid rgba(127,127,127,.35); border-radius: 14px; padding: 12px; }
+    .kv { display:grid; gap:6px; }
+    .k { font-size: 12px; opacity: .75; }
+    .v { font-size: 15px; }
+    .gallery { display:grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 12px; }
+    .gallery img { width: 100%; height: auto; border-radius: 14px; border: 1px solid rgba(127,127,127,.25); }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { text-align:left; padding: 10px 8px; border-bottom: 1px solid rgba(127,127,127,.25); }
+    th { font-size: 12px; opacity: .8; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .95em; }
+    .actions { display:flex; gap:10px; flex-wrap: wrap; margin-top: 10px; }
+    .btn {
+      display:inline-block; padding: 10px 12px; border-radius: 12px;
+      border: 1px solid rgba(127,127,127,.35); text-decoration:none;
+    }
+    .btn:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="./index.html">← Back to listings</a>
+    <span class="muted">Inland Vacancy Board</span>
+  </header>
+
+  <main>
+    <div class="notice">
+      <strong>Information only.</strong> Verify all details independently.
+    </div>
+
+    <div id="state" class="notice">Loading listing…</div>
+
+    <section id="content" hidden>
+      <p class="muted" id="meta"></p>
+      <h1 id="title"></h1>
+
+      <div class="actions" id="actions"></div>
+
+      <div class="grid" id="basics"></div>
+
+      <h2 style="margin-top:18px; font-size:18px;">Photos</h2>
+      <div class="gallery" id="gallery"></div>
+
+      <h2 style="margin-top:18px; font-size:18px;">All details</h2>
+      <table aria-label="All listing fields">
+        <thead>
+          <tr><th>Field</th><th>Value</th></tr>
+        </thead>
+        <tbody id="allfields"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    const CSV_PATH = "./resources/listings.csv";
+
+    const qs = new URLSearchParams(location.search);
+    const listingId = qs.get("id");
+
+    const els = {
+      state: document.getElementById("state"),
+      content: document.getElementById("content"),
+      title: document.getElementById("title"),
+      meta: document.getElementById("meta"),
+      basics: document.getElementById("basics"),
+      gallery: document.getElementById("gallery"),
+      allfields: document.getElementById("allfields"),
+      actions: document.getElementById("actions"),
+    };
+
+    function parseCSV(csvText) {
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < csvText.length; i++) {
+        const c = csvText[i];
+        const next = csvText[i + 1];
+
+        if (inQuotes) {
+          if (c === '"' && next === '"') { field += '"'; i++; continue; }
+          if (c === '"') { inQuotes = false; continue; }
+          field += c;
+          continue;
+        }
+
+        if (c === '"') { inQuotes = true; continue; }
+        if (c === ",") { row.push(field); field = ""; continue; }
+        if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; continue; }
+        if (c === "\r") { continue; }
+        field += c;
+      }
+      if (field.length || row.length) { row.push(field); rows.push(row); }
+      while (rows.length && rows[rows.length - 1].every(v => !String(v).trim())) rows.pop();
+
+      if (!rows.length) return [];
+      const headers = rows[0].map(h => h.trim());
+      const data = [];
+      for (let r = 1; r < rows.length; r++) {
+        const obj = {};
+        for (let c = 0; c < headers.length; c++) obj[headers[c]] = (rows[r][c] ?? "").trim();
+        data.push(obj);
+      }
+      return data;
+    }
+
+    function money(v) {
+      if (v === "" || v == null) return "—";
+      const n = Number(String(v).replace(/[^\d.]/g, ""));
+      if (!Number.isFinite(n)) return "—";
+      return n.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+    }
+
+    function textOrDash(v) {
+      const s = (v ?? "").toString().trim();
+      return s ? s : "—";
+    }
+
+    function buildAddress(item) {
+      const a1 = (item.address_line1 || "").trim();
+      const a2 = (item.address_line2 || "").trim();
+      const city = (item.city || "").trim();
+      const parts = [a1, a2].filter(Boolean).join(", ");
+      return [parts, city].filter(Boolean).join(" — ");
+    }
+
+    function splitPhotos(photosField) {
+      // Accept semicolon OR comma separated URLs
+      // Example: https://.../1.jpg;https://.../2.jpg
+      const raw = (photosField || "").trim();
+      if (!raw) return [];
+      const parts = raw.includes(";") ? raw.split(";") : raw.split(",");
+      return parts.map(s => s.trim()).filter(Boolean);
+    }
+
+    function addKV(container, k, v) {
+      const card = document.createElement("div");
+      card.className = "card kv";
+
+      const dk = document.createElement("div");
+      dk.className = "k";
+      dk.textContent = k;
+
+      const dv = document.createElement("div");
+      dv.className = "v";
+      dv.textContent = v;
+
+      card.append(dk, dv);
+      container.appendChild(card);
+    }
+
+    function addActionLink(label, href) {
+      if (!href) return;
+      const a = document.createElement("a");
+      a.className = "btn";
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = label;
+      els.actions.appendChild(a);
+    }
+
+    async function main() {
+      try {
+        if (!listingId) {
+          els.state.classList.add("error");
+          els.state.textContent = "Missing listing id. Open a listing from the main page.";
+          return;
+        }
+
+        const res = await fetch(CSV_PATH, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to load CSV (${res.status})`);
+        const text = await res.text();
+
+        const all = parseCSV(text);
+        const item = all.find(r => (r.listing_id || "") === listingId);
+
+        if (!item) {
+          els.state.classList.add("error");
+          els.state.textContent = `Listing not found for id: ${listingId}`;
+          return;
+        }
+
+        // Title/meta
+        document.title = `${buildAddress(item)} | Inland Vacancy Board`;
+        els.title.textContent = buildAddress(item);
+        els.meta.textContent = `ID: ${textOrDash(item.listing_id)} • Status: ${textOrDash(item.status)} • Updated: ${textOrDash(item.updated_at)}`;
+
+        // Action links
+        addActionLink("Listing link", (item.listing_url || "").trim());
+        addActionLink("Photos link", (item.photos_url || "").trim());
+        if ((item.contact_email || "").trim()) addActionLink("Email", `mailto:${item.contact_email.trim()}`);
+        if ((item.contact_phone || "").trim()) addActionLink("Call", `tel:${item.contact_phone.trim().replace(/\s+/g,"")}`);
+
+        // Basics cards (you can reorder as you like)
+        addKV(els.basics, "Rent", money(item.rent_usd));
+        addKV(els.basics, "Deposit", money(item.deposit_usd));
+        addKV(els.basics, "Beds", textOrDash(item.beds));
+        addKV(els.basics, "Baths", textOrDash(item.baths));
+        addKV(els.basics, "Sqft", textOrDash(item.sqft));
+        addKV(els.basics, "Available", textOrDash(item.available_date));
+        addKV(els.basics, "Lease term (months)", textOrDash(item.lease_term_months));
+        addKV(els.basics, "Property type", textOrDash(item.property_type));
+        addKV(els.basics, "Pets", textOrDash(item.pet_policy));
+        addKV(els.basics, "Parking", textOrDash(item.parking));
+        addKV(els.basics, "Utilities included", textOrDash(item.utilities_included));
+        addKV(els.basics, "Contact", [item.contact_name, item.contact_phone].filter(Boolean).join(" • ") || "—");
+
+        // Photo gallery
+        const photos = splitPhotos(item.photos_url);
+        if (!photos.length) {
+          const p = document.createElement("p");
+          p.className = "muted";
+          p.textContent = "No photo URLs provided.";
+          els.gallery.appendChild(p);
+        } else {
+          for (const url of photos) {
+            const img = document.createElement("img");
+            img.loading = "lazy";
+            img.alt = `Photo for ${item.listing_id}`;
+            img.src = url;
+            els.gallery.appendChild(img);
+          }
+        }
+
+        // All fields table
+        const keys = Object.keys(item);
+        for (const k of keys) {
+          const tr = document.createElement("tr");
+          const tdK = document.createElement("td");
+          tdK.innerHTML = `<code>${k}</code>`;
+          const tdV = document.createElement("td");
+          // Pretty-format a few known fields
+          let v = item[k];
+          if (k === "rent_usd" || k === "deposit_usd") v = money(item[k]);
+          else v = textOrDash(item[k]);
+          tdV.textContent = v;
+          tr.append(tdK, tdV);
+          els.allfields.appendChild(tr);
+        }
+
+        els.state.remove();
+        els.content.hidden = false;
+
+      } catch (err) {
+        els.state.classList.add("error");
+        els.state.textContent = `Error: ${err.message}`;
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
+
