@@ -1,0 +1,21 @@
+listing_id,status,city,address_line1,address_line2,property_type,beds,baths,sqft,rent_usd,deposit_usd,available_date,lease_term_months,pet_policy,parking,utilities_included,contact_name,contact_phone,contact_email,listing_url,photos_url,notes,updated_at
+POM-0001,Vacant,Pomona,830 E Kingsley Ave,Apt 13J,Apartment,2,2,,2300,2300,2026-01-05,,,,,Fabiola,9092368670,,,,2026-01-23
+POM-0002,Vacant,Pomona,720 N San Antonio Ave,Apt 13N,Apartment,1,1,,1950,1800,2026-01-01,,,,,Fabiola,9092368670,,,,2026-01-23
+POM-0003,Vacant,Pomona,720 N San Antonio Ave,Apt 11P,Apartment,2,1,,2300,1700,2026-01-01,,,,,Fabiola,9092368670,,,,2026-01-23
+POM-0004,Vacant,Pomona,1641 E Kingsley Ave,Apt 18,Apartment,1,1,,1950,1950,2026-01-02,,,,,Daisy,9096347186,,,,2026-01-23
+POM-0005,Vacant,Pomona,1641 E Kingsley Ave,Apt 30,Apartment,1,1,,1750,1500,2025-12-01,,,,,Daisy,9096347186,,,,2026-01-23
+POM-0006,Vacant,Pomona,1111 S Reservoir St,Apt 6,Apartment,1,1,,1950,1800,2026-01-01,,,,,Yanelcy,9095419058,,,,2026-01-23
+POM-0007,Vacant,Pomona,1111 S Reservoir St,Apt 20,Apartment,1,1,,1950,1950,2026-01-05,,,,,Yanelcy,9095419058,,,,2026-01-23
+POM-0008,Vacant,Pomona,1111 S Reservoir St,Apt 23,Apartment,1,1,,1950,1950,2026-01-06,,,,,Yanelcy,9095419058,,,,2026-01-23
+POM-0009,Vacant,Pomona,2434 Valhalla St,,House,3,1,1028,3500,2500,2025-12-24,,,,,,,,2026-01-23
+UPL-0001,Vacant,Upland,270 W Amber Ct,Apt 25,Apartment,1,1,,1950,1800,2025-12-24,,,,,Nazareth,9098284888,,,,2026-01-23
+MON-0001,Vacant,Montclair,4435 Benito St,,House,3,1,1170,3400,2500,2026-01-02,,,,,Office,9096253259,,,,2026-01-23
+CHI-0001,Vacant,Chino,637 W Brooks Ave,Apt 42,ADU,1,1,,1450,1200,2025-12-01,,,,,Dale,9095737239,,,,2026-01-23
+POM-0010,Vacant,Pomona,222 E Foothill Blvd,Apt 24,ADU,0,1,,700,700,2025-05-01,,,,,Doug Fisher,9095734836,,,,2026-01-23
+POM-0011,Vacant,Pomona,222 E Foothill Blvd,Apt 35,ADU,1,1,,1450,1400,2025-07-30,,,,,Doug Fisher,9095734836,,,,2026-01-23
+POM-0012,Vacant,Pomona,222 E Foothill Blvd,Apt 37,ADU,0,1,,750,750,2025-09-02,,,,,Doug Fisher,9095734836,,,,2026-01-23
+POM-0013,Vacant,Pomona,222 E Foothill Blvd,Apt 61,ADU,0,0,,1000,1000,2026-01-02,,,,,Doug Fisher,9095734836,,,,2026-01-23
+POM-0014,Vacant,Pomona,222 E Foothill Blvd,Apt 66,ADU,1,1,,1300,1300,2025-10-13,,,,,Doug Fisher,9095734836,,,,2026-01-23
+RIV-0001,Vacant,Riverside,775 E Foothill Blvd,Apt 55,ADU,1,1,,1350,1300,2025-12-18,,,,,Georgina,9097569059,,,,2026-01-23
+RIV-0002,Vacant,Riverside,775 E Foothill Blvd,Apt 72,Apartment,1,1,,1400,1300,2025-12-24,,,,,Georgina,9097569059,,,,2026-01-23
+

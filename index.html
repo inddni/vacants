@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Inland Vacancy Board</title>
+  <meta name="description" content="Vacancy listings for Pomona, Montclair, Upland, Rancho Cucamonga, Chino, and Riverside. Information purposes only." />
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; line-height: 1.4; }
+    header { padding: 20px 16px; border-bottom: 1px solid rgba(127,127,127,.35); }
+    header h1 { margin: 0 0 6px; font-size: 20px; }
+    header p { margin: 0; opacity: .85; font-size: 14px; }
+    main { padding: 16px; max-width: 1100px; margin: 0 auto; }
+    .bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 12px 0 16px; }
+    .field { display: grid; gap: 6px; }
+    label { font-size: 12px; opacity: .8; }
+    input, select, button {
+      font: inherit; padding: 10px 12px; border-radius: 10px;
+      border: 1px solid rgba(127,127,127,.35); background: transparent;
+    }
+    button { cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid rgba(127,127,127,.25); vertical-align: top; }
+    th { font-size: 12px; opacity: .8; letter-spacing: .02em; }
+    .muted { opacity: .75; }
+    .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid rgba(127,127,127,.35); font-size: 12px; }
+    .row-actions a { text-decoration: none; }
+    .row-actions a:hover { text-decoration: underline; }
+    footer { padding: 18px 16px; border-top: 1px solid rgba(127,127,127,.35); font-size: 13px; opacity: .85; }
+    .notice { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(127,127,127,.35); }
+    .error { border-color: rgba(220,60,60,.6); }
+    .loading { opacity: .75; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Inland Vacancy Board</h1>
+    <p class="muted">Pomona • Montclair • Upland • Rancho Cucamonga • Chino • Riverside</p>
+  </header>
+
+  <main>
+    <div class="notice">
+      <strong>Information only.</strong> This site provides vacancy information for reference and does not offer brokerage, screening, or leasing services.
+    </div>
+
+    <div class="bar" aria-label="Filters">
+      <div class="field" style="min-width: 220px;">
+        <label for="q">Search (address)</label>
+        <input id="q" type="search" placeholder="e.g., Foothill, 2nd St, Apt 12" />
+      </div>
+
+      <div class="field" style="min-width: 210px;">
+        <label for="city">City</label>
+        <select id="city">
+          <option value="">All</option>
+          <option>Pomona</option>
+          <option>Montclair</option>
+          <option>Upland</option>
+          <option>Rancho Cucamonga</option>
+          <option>Chino</option>
+          <option>Riverside</option>
+        </select>
+      </div>
+
+      <div class="field" style="min-width: 190px;">
+        <label for="status">Status</label>
+        <select id="status">
+          <option value="Vacant">Vacant</option>
+          <option value="">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Not Vacant">Not Vacant</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>&nbsp;</label>
+        <button id="reset" type="button">Reset</button>
+      </div>
+
+      <div class="field" style="margin-left:auto;">
+        <label class="muted">Count</label>
+        <div id="count" class="pill">—</div>
+      </div>
+    </div>
+
+    <div id="state" class="notice loading">Loading listings…</div>
+
+    <div style="overflow:auto; border-radius: 12px; border: 1px solid rgba(127,127,127,.35); margin-top: 12px;">
+      <table aria-label="Vacancy listings table">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Beds</th>
+            <th>Baths</th>
+            <th>Rent</th>
+            <th>Deposit</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    Data source: <code>resources/listings.csv</code>. Update the CSV to refresh the site.
+  </footer>
+
+  <script>
+    const CSV_PATH = "./resources/listings.csv";
+
+    const els = {
+      q: document.getElementById("q"),
+      city: document.getElementById("city"),
+      status: document.getElementById("status"),
+      reset: document.getElementById("reset"),
+      tbody: document.getElementById("tbody"),
+      state: document.getElementById("state"),
+      count: document.getElementById("count"),
+    };
+
+    function parseCSV(csvText) {
+      // Robust-enough CSV parser for quoted fields with commas.
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < csvText.length; i++) {
+        const c = csvText[i];
+        const next = csvText[i + 1];
+
+        if (inQuotes) {
+          if (c === '"' && next === '"') { field += '"'; i++; continue; }
+          if (c === '"') { inQuotes = false; continue; }
+          field += c;
+          continue;
+        }
+
+        if (c === '"') { inQuotes = true; continue; }
+        if (c === ",") { row.push(field); field = ""; continue; }
+        if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; continue; }
+        if (c === "\r") { continue; } // ignore
+        field += c;
+      }
+      // last field
+      if (field.length || row.length) { row.push(field); rows.push(row); }
+
+      // Trim empty trailing rows
+      while (rows.length && rows[rows.length - 1].every(v => !String(v).trim())) rows.pop();
+
+      if (!rows.length) return [];
+      const headers = rows[0].map(h => h.trim());
+      const data = [];
+
+      for (let r = 1; r < rows.length; r++) {
+        const obj = {};
+        for (let c = 0; c < headers.length; c++) {
+          obj[headers[c]] = (rows[r][c] ?? "").trim();
+        }
+        data.push(obj);
+      }
+      return data;
+    }
+
+    function money(v) {
+      if (v === "" || v == null) return "—";
+      const n = Number(String(v).replace(/[^\d.]/g, ""));
+      if (!Number.isFinite(n)) return "—";
+      return n.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+    }
+
+    function safeText(s) {
+      return (s ?? "").toString();
+    }
+
+    function buildAddress(item) {
+      const a1 = safeText(item.address_line1);
+      const a2 = safeText(item.address_line2);
+      const city = safeText(item.city);
+      const parts = [a1, a2].filter(Boolean).join(", ");
+      return [parts, city].filter(Boolean).join(" — ");
+    }
+
+    function renderTable(items) {
+      els.tbody.innerHTML = "";
+      const frag = document.createDocumentFragment();
+
+      for (const it of items) {
+        const tr = document.createElement("tr");
+
+        const tdAddr = document.createElement("td");
+        tdAddr.textContent = buildAddress(it);
+
+        const tdBeds = document.createElement("td");
+        tdBeds.textContent = it.beds ? it.beds : "—";
+
+        const tdBaths = document.createElement("td");
+        tdBaths.textContent = it.baths ? it.baths : "—";
+
+        const tdRent = document.createElement("td");
+        tdRent.textContent = money(it.rent_usd);
+
+        const tdDep = document.createElement("td");
+        tdDep.textContent = money(it.deposit_usd);
+
+        const tdLink = document.createElement("td");
+        tdLink.className = "row-actions";
+        const a = document.createElement("a");
+        a.href = `./listing.html?id=${encodeURIComponent(it.listing_id)}`;
+        a.textContent = "View →";
+        tdLink.appendChild(a);
+
+        tr.append(tdAddr, tdBeds, tdBaths, tdRent, tdDep, tdLink);
+        frag.appendChild(tr);
+      }
+
+      els.tbody.appendChild(frag);
+      els.count.textContent = `${items.length}`;
+    }
+
+    function applyFilters(all) {
+      const q = els.q.value.trim().toLowerCase();
+      const city = els.city.value.trim();
+      const status = els.status.value.trim();
+
+      return all.filter(it => {
+        if (status && (it.status || "").trim() !== status) return false;
+        if (city && (it.city || "").trim() !== city) return false;
+        if (q) {
+          const hay = `${it.address_line1 || ""} ${it.address_line2 || ""}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+    }
+
+    async function main() {
+      try {
+        els.state.classList.add("loading");
+        els.state.textContent = "Loading listings…";
+
+        const res = await fetch(CSV_PATH, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to load CSV (${res.status})`);
+        const text = await res.text();
+
+        const all = parseCSV(text);
+
+        // Default: show vacant first; user can change Status dropdown
+        const allowedCities = new Set(["Pomona","Montclair","Upland","Rancho Cucamonga","Chino","Riverside"]);
+        const cleaned = all.filter(it => allowedCities.has((it.city || "").trim()));
+
+        if (!cleaned.length) {
+          els.state.classList.remove("loading");
+          els.state.classList.add("error");
+          els.state.textContent = "No listings found. Check that resources/listings.csv exists and has rows.";
+          renderTable([]);
+          return;
+        }
+
+        els.state.remove();
+
+        const rerender = () => renderTable(applyFilters(cleaned));
+
+        els.q.addEventListener("input", rerender);
+        els.city.addEventListener("change", rerender);
+        els.status.addEventListener("change", rerender);
+        els.reset.addEventListener("click", () => {
+          els.q.value = "";
+          els.city.value = "";
+          els.status.value = "Vacant";
+          rerender();
+        });
+
+        rerender();
+
+      } catch (err) {
+        els.state.classList.remove("loading");
+        els.state.classList.add("error");
+        els.state.textContent = `Error: ${err.message}`;
+        renderTable([]);
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
+
