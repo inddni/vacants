@@ -58,14 +58,7 @@
 
       <h2 style="margin-top:18px; font-size:18px;">Photos</h2>
       <div class="gallery" id="gallery"></div>
-
-      <h2 style="margin-top:18px; font-size:18px;">All details</h2>
-      <table aria-label="All listing fields">
-        <thead>
-          <tr><th>Field</th><th>Value</th></tr>
-        </thead>
-        <tbody id="allfields"></tbody>
-      </table>
+      
     </section>
   </main>
 
@@ -240,22 +233,6 @@
             img.src = url;
             els.gallery.appendChild(img);
           }
-        }
-
-        // All fields table
-        const keys = Object.keys(item);
-        for (const k of keys) {
-          const tr = document.createElement("tr");
-          const tdK = document.createElement("td");
-          tdK.innerHTML = `<code>${k}</code>`;
-          const tdV = document.createElement("td");
-          // Pretty-format a few known fields
-          let v = item[k];
-          if (k === "rent_usd" || k === "deposit_usd") v = money(item[k]);
-          else v = textOrDash(item[k]);
-          tdV.textContent = v;
-          tr.append(tdK, tdV);
-          els.allfields.appendChild(tr);
         }
 
         els.state.remove();
