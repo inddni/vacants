@@ -67,6 +67,7 @@
 
     const qs = new URLSearchParams(location.search);
     const listingId = qs.get("id");
+    const DEFAULT_OFFICE_PHONE = "9096253259";
 
     const els = {
       state: document.getElementById("state"),
@@ -202,7 +203,11 @@
         addActionLink("Listing link", (item.listing_url || "").trim());
         addActionLink("Photos link", (item.photos_url || "").trim());
         if ((item.contact_email || "").trim()) addActionLink("Email", `mailto:${item.contact_email.trim()}`);
-        if ((item.contact_phone || "").trim()) addActionLink("Call", `tel:${item.contact_phone.trim().replace(/\s+/g,"")}`);
+        const callNumber =
+  (item.contact_phone || "").trim() || DEFAULT_OFFICE_PHONE;
+
+addActionLink("Call", `tel:${callNumber}`);
+
 
         // Basics cards (you can reorder as you like)
         addKV(els.basics, "Rent", money(item.rent_usd));
@@ -216,7 +221,16 @@
         addKV(els.basics, "Pets", textOrDash(item.pet_policy));
         addKV(els.basics, "Parking", textOrDash(item.parking));
         addKV(els.basics, "Utilities included", textOrDash(item.utilities_included));
-        addKV(els.basics, "Contact", [item.contact_name, item.contact_phone].filter(Boolean).join(" • ") || "—");
+        const phone =
+  (item.contact_phone || "").trim() || DEFAULT_OFFICE_PHONE;
+
+const contactLabel = [
+  (item.contact_name || "").trim(),
+  phone
+].filter(Boolean).join(" • ");
+
+addKV(els.basics, "Contact", contactLabel);
+
 
         // Photo gallery
         const photos = splitPhotos(item.photos_url);
