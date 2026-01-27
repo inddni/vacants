@@ -351,7 +351,7 @@ background: var(--surface);
         <!-- Ferris wheel (fixed rotation) -->
 <g class="ivb-wheel" transform="translate(1160,120)">
   <!-- Put the whole wheel inside a sub-group that rotates around (120,120) -->
-  <g class="ivb-wheel__rot" transform-origin="120px 120px" style="transform-box: fill-box;">
+  <g class="ivb-wheel__rot" transform-origin="12px 12px" style="transform-box: fill-box;">
     <circle cx="120" cy="120" r="95" fill="none" stroke="#1F2937" stroke-width="8" opacity="0.25"/>
     <circle cx="120" cy="120" r="90" fill="none" stroke="#111827" stroke-width="4" opacity="0.35"/>
     <circle cx="120" cy="120" r="10" fill="#111827" opacity="0.35"/>
@@ -446,7 +446,17 @@ background: var(--surface);
           <rect x="62" y="84" width="26" height="44" rx="10" fill="#111827" opacity="0.14"/>
         </g>
       </g>
-
+      <!-- Subtle foreground bushes for depth -->
+      <g opacity="0.9">
+        <circle cx="330" cy="360" r="38" fill="#166534"/>
+        <circle cx="370" cy="370" r="34" fill="#14532D"/>
+        <circle cx="640" cy="370" r="44" fill="#166534"/>
+        <circle cx="690" cy="360" r="34" fill="#14532D"/>
+        <circle cx="920" cy="372" r="46" fill="#166534"/>
+        <circle cx="970" cy="362" r="36" fill="#14532D"/>
+        <circle cx="1240" cy="372" r="52" fill="#166534"/>
+        <circle cx="1300" cy="362" r="40" fill="#14532D"/>
+      </g>
       <!-- SIGNS (blink/pulse) -->
       <g class="ivb-signs" filter="url(#ivbSoftShadow)">
         <g transform="translate(120,330)">
@@ -483,7 +493,7 @@ background: var(--surface);
         </g>
         
         <g transform="translate(770,350)">
-          <rect x="0" y="0" width="210" height="54" rx="12" fill="#0EA5E9" opacity="0.75"/>
+          <rect x="0" y="0" width="310" height="54" rx="12" fill="#0EA5E9" opacity="0.75"/>
           <text x="105" y="35" text-anchor="middle" font-size="20" font-weight="800"
                 font-family="ui-sans-serif, system-ui" fill="#F8FAFC">INLAND VACANCY BOARD</text>
         </g>
@@ -494,18 +504,6 @@ background: var(--surface);
           <text x="80" y="36" text-anchor="middle" font-size="22" font-weight="800"
                 font-family="ui-sans-serif, system-ui" fill="#E0F2FE">San Bernardino</text>
         </g>
-      </g>
-
-      <!-- Subtle foreground bushes for depth -->
-      <g opacity="0.9">
-        <circle cx="330" cy="360" r="38" fill="#166534"/>
-        <circle cx="370" cy="370" r="34" fill="#14532D"/>
-        <circle cx="640" cy="370" r="44" fill="#166534"/>
-        <circle cx="690" cy="360" r="34" fill="#14532D"/>
-        <circle cx="920" cy="372" r="46" fill="#166534"/>
-        <circle cx="970" cy="362" r="36" fill="#14532D"/>
-        <circle cx="1240" cy="372" r="52" fill="#166534"/>
-        <circle cx="1300" cy="362" r="40" fill="#14532D"/>
       </g>
     </g>
   </svg>
