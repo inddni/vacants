@@ -26,7 +26,100 @@
       --surface: rgba(255,255,255,.04);
       color-scheme: dark;
     }
+.ivb-hero{
+    width: 100%;
+    max-width: 1100px;
+    margin: 18px auto 8px;
+    padding: 0 16px;
+  }
+  .ivb-hero__svg{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 22px;
+    border: 1px solid var(--border);
+background: var(--surface);
+    box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  }
 
+  /* Animations (vector-safe) */
+  .ivb-wheel{
+    transform-origin: 1280px 240px; /* approximate global center after translate */
+    animation: ivbWheelSpin 12s linear infinite;
+  }
+  @keyframes ivbWheelSpin{
+    from{ transform: translate(1160px,120px) rotate(0deg); }
+    to  { transform: translate(1160px,120px) rotate(360deg); }
+  }
+
+  .ivb-cloud--1{ animation: ivbCloudDrift1 38s linear infinite; }
+  .ivb-cloud--2{ animation: ivbCloudDrift2 52s linear infinite; }
+  .ivb-cloud--3{ animation: ivbCloudDrift3 46s linear infinite; }
+
+  @keyframes ivbCloudDrift1{
+    from{ transform: translateX(-160px); }
+    to  { transform: translateX(1760px); }
+  }
+  @keyframes ivbCloudDrift2{
+    from{ transform: translateX(420px); }
+    to  { transform: translateX(-1900px); }
+  }
+  @keyframes ivbCloudDrift3{
+    from{ transform: translateX(0px); }
+    to  { transform: translateX(-1500px); }
+  }
+
+  .ivb-plane{
+    animation: ivbPlane 18s linear infinite;
+  }
+  @keyframes ivbPlane{
+    0%   { transform: translate(-240px,40px) scale(1); opacity: 0; }
+    6%   { opacity: .9; }
+    50%  { transform: translate(780px,10px) scale(1.03); opacity: .9; }
+    94%  { opacity: .9; }
+    100% { transform: translate(1820px,70px) scale(1); opacity: 0; }
+  }
+
+  .ivb-train{
+    animation: ivbTrain 10s ease-in-out infinite;
+  }
+  @keyframes ivbTrain{
+    0%   { transform: translate(260px,250px); }
+    50%  { transform: translate(520px,250px); }
+    100% { transform: translate(260px,250px); }
+  }
+
+  .ivb-mtn--far{
+    animation: ivbParallaxFar 14s ease-in-out infinite;
+  }
+  .ivb-mtn--near{
+    animation: ivbParallaxNear 10s ease-in-out infinite;
+  }
+  @keyframes ivbParallaxFar{
+    0%,100%{ transform: translateX(0px); }
+    50%    { transform: translateX(-18px); }
+  }
+  @keyframes ivbParallaxNear{
+    0%,100%{ transform: translateX(0px); }
+    50%    { transform: translateX(-32px); }
+  }
+
+  .ivb-sign--pulse{
+    transform-origin: center;
+    animation: ivbPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes ivbPulse{
+    0%,100%{ transform: scale(1); filter: none; }
+    50%     { transform: scale(1.03); }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .ivb-wheel, .ivb-cloud--1, .ivb-cloud--2, .ivb-cloud--3,
+    .ivb-plane, .ivb-train, .ivb-mtn--far, .ivb-mtn--near, .ivb-sign--pulse{
+      animation: none !important;
+    }
+  }
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       margin: 0;
@@ -153,6 +246,360 @@
       </label>
     </div>
   </header>
+<!-- ===== Inland Vacancy Board • Animated Vector Hero (drop-in) ===== -->
+<section class="ivb-hero" aria-label="Inland Vacancy Board hero illustration">
+  <svg class="ivb-hero__svg" viewBox="0 0 1600 420" role="img" aria-label="Inland region housing collage illustration">
+    <defs>
+      <linearGradient id="ivbSky" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#FDBA74"/>
+        <stop offset="55%" stop-color="#A5D8FF"/>
+        <stop offset="100%" stop-color="#60A5FA"/>
+      </linearGradient>
+
+      <linearGradient id="ivbGround" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#14532D"/>
+        <stop offset="100%" stop-color="#0B3B22"/>
+      </linearGradient>
+
+      <filter id="ivbSoftShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,.25)"/>
+      </filter>
+
+      <clipPath id="ivbClip">
+        <rect x="0" y="0" width="1600" height="420" rx="22" ry="22"></rect>
+      </clipPath>
+    </defs>
+
+    <g clip-path="url(#ivbClip)">
+      <!-- SKY -->
+      <rect x="0" y="0" width="1600" height="420" fill="url(#ivbSky)"></rect>
+
+      <!-- SUN -->
+      <circle cx="420" cy="135" r="72" fill="#FDE68A" opacity="0.95"></circle>
+
+      <!-- CLOUDS (animated) -->
+      <g class="ivb-clouds" opacity="0.95">
+        <g class="ivb-cloud ivb-cloud--1">
+          <path d="M110 110c8-18 28-30 50-27 11-16 35-21 53-9 16-9 37-3 46 14 20 0 36 14 36 31 0 18-15 31-34 31H148c-22 0-40-14-40-32 0-4 1-8 2-8z"
+                fill="#FFFFFF" opacity="0.92"/>
+        </g>
+        <g class="ivb-cloud ivb-cloud--2" opacity="0.9">
+          <path d="M1040 90c7-16 25-26 45-24 10-14 31-18 47-8 14-8 33-3 41 12 18 0 33 12 33 27 0 16-14 27-31 27h-192c-19 0-35-12-35-28 0-4 1-7 2-6z"
+                fill="#FFFFFF"/>
+        </g>
+        <g class="ivb-cloud ivb-cloud--3" opacity="0.85">
+          <path d="M1260 150c6-13 21-21 37-20 8-12 25-14 38-6 12-6 26-2 33 10 15 0 27 10 27 22 0 13-11 22-25 22h-158c-16 0-29-10-29-23 0-3 1-5 2-5z"
+                fill="#FFFFFF"/>
+        </g>
+      </g>
+
+      <!-- DISTANT MOUNTAINS (parallax slow) -->
+      <g class="ivb-mtn ivb-mtn--far">
+        <path d="M0 255 L220 120 L440 255 L620 160 L820 255 L1020 130 L1230 255 L1400 175 L1600 255 L1600 420 L0 420 Z"
+              fill="#93C5FD" opacity="0.55"></path>
+        <path d="M220 120 L305 205 L330 180 L365 230 L440 255 Z" fill="#BFDBFE" opacity="0.8"></path>
+        <path d="M620 160 L705 235 L740 210 L780 248 L820 255 Z" fill="#BFDBFE" opacity="0.8"></path>
+        <path d="M1020 130 L1100 215 L1130 190 L1170 235 L1230 255 Z" fill="#BFDBFE" opacity="0.8"></path>
+        <path d="M1400 175 L1470 245 L1495 225 L1535 255 L1600 255 Z" fill="#BFDBFE" opacity="0.8"></path>
+      </g>
+
+      <!-- NEAR MOUNTAINS (parallax a bit faster) -->
+      <g class="ivb-mtn ivb-mtn--near">
+        <path d="M0 290 L260 165 L480 290 L690 185 L905 290 L1120 170 L1320 290 L1600 205 L1600 420 L0 420 Z"
+              fill="#60A5FA" opacity="0.55"></path>
+      </g>
+
+      <!-- SKYLINE / LANDMARKS -->
+      <g class="ivb-skyline" filter="url(#ivbSoftShadow)">
+        <!-- Tower / Mission-ish -->
+        <g transform="translate(95,165)">
+          <rect x="0" y="40" width="86" height="150" rx="10" fill="#F59E0B"/>
+          <rect x="12" y="0" width="62" height="62" rx="12" fill="#FB923C"/>
+          <rect x="26" y="20" width="34" height="42" rx="10" fill="#7C2D12" opacity="0.25"/>
+          <path d="M43 -12 L63 10 L23 10 Z" fill="#B45309"/>
+          <rect x="40" y="-24" width="6" height="12" fill="#7C2D12"/>
+          <path d="M43 -28 L43 -40" stroke="#7C2D12" stroke-width="4" stroke-linecap="round"/>
+        </g>
+
+        <!-- Mid-rise building -->
+        <g transform="translate(720,150)">
+          <rect x="0" y="0" width="120" height="190" rx="16" fill="#1F2937" opacity="0.25"/>
+          <rect x="12" y="14" width="96" height="162" rx="14" fill="#94A3B8" opacity="0.45"/>
+          <g opacity="0.65">
+            <rect x="28" y="30" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="70" y="30" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="28" y="58" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="70" y="58" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="28" y="86" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="70" y="86" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="28" y="114" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="70" y="114" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="28" y="142" width="22" height="14" rx="4" fill="#E0F2FE"/>
+            <rect x="70" y="142" width="22" height="14" rx="4" fill="#E0F2FE"/>
+          </g>
+        </g>
+
+        <!-- Dome civic building -->
+        <g transform="translate(930,180)">
+          <rect x="0" y="55" width="210" height="120" rx="18" fill="#FDE68A" opacity="0.95"/>
+          <path d="M25 55 Q105 -10 185 55 Z" fill="#2563EB" opacity="0.9"/>
+          <circle cx="105" cy="35" r="10" fill="#1D4ED8"/>
+          <rect x="60" y="90" width="90" height="85" rx="14" fill="#FFF7ED" opacity="0.8"/>
+          <rect x="82" y="110" width="46" height="55" rx="10" fill="#1F2937" opacity="0.18"/>
+        </g>
+
+        <!-- Ferris wheel (animated rotation) -->
+        <g class="ivb-wheel" transform="translate(1160,120)">
+          <circle cx="120" cy="120" r="95" fill="none" stroke="#1F2937" stroke-width="8" opacity="0.25"/>
+          <circle cx="120" cy="120" r="90" fill="none" stroke="#111827" stroke-width="4" opacity="0.35"/>
+          <circle cx="120" cy="120" r="10" fill="#111827" opacity="0.35"/>
+          <g opacity="0.5" stroke="#111827" stroke-width="3">
+            <line x1="120" y1="120" x2="120" y2="30"/>
+            <line x1="120" y1="120" x2="190" y2="60"/>
+            <line x1="120" y1="120" x2="210" y2="120"/>
+            <line x1="120" y1="120" x2="190" y2="180"/>
+            <line x1="120" y1="120" x2="120" y2="210"/>
+            <line x1="120" y1="120" x2="60" y2="190"/>
+            <line x1="120" y1="120" x2="30" y2="120"/>
+            <line x1="120" y1="120" x2="60" y2="60"/>
+          </g>
+          <!-- gondolas -->
+          <g>
+            <rect x="112" y="18" width="16" height="14" rx="4" fill="#FB923C"/>
+            <rect x="188" y="54" width="16" height="14" rx="4" fill="#F97316"/>
+            <rect x="210" y="112" width="16" height="14" rx="4" fill="#FB923C"/>
+            <rect x="188" y="172" width="16" height="14" rx="4" fill="#F97316"/>
+            <rect x="112" y="210" width="16" height="14" rx="4" fill="#FB923C"/>
+            <rect x="52" y="172" width="16" height="14" rx="4" fill="#F97316"/>
+            <rect x="14" y="112" width="16" height="14" rx="4" fill="#FB923C"/>
+            <rect x="52" y="54" width="16" height="14" rx="4" fill="#F97316"/>
+          </g>
+        </g>
+
+        <!-- Route 66 sign -->
+        <g transform="translate(1340,210)" filter="url(#ivbSoftShadow)">
+          <path d="M120 0
+                   C155 0 170 18 170 42
+                   C170 80 145 110 120 110
+                   L50 110
+                   C25 110 0 80 0 42
+                   C0 18 15 0 50 0 Z"
+                fill="#F8FAFC" opacity="0.95"/>
+          <path d="M120 8
+                   C148 8 160 22 160 42
+                   C160 75 140 102 120 102
+                   L50 102
+                   C30 102 10 75 10 42
+                   C10 22 22 8 50 8 Z"
+                fill="none" stroke="#111827" stroke-width="6" opacity="0.45"/>
+          <text x="85" y="42" font-size="22" font-family="ui-sans-serif, system-ui" fill="#111827" opacity="0.85" text-anchor="middle">ROUTE</text>
+          <text x="85" y="78" font-size="44" font-weight="800" font-family="ui-sans-serif, system-ui" fill="#111827" opacity="0.9" text-anchor="middle">66</text>
+        </g>
+
+        <!-- Power tower -->
+        <g transform="translate(1510,175)" opacity="0.65">
+          <path d="M0 0 L-28 210 L28 210 Z" fill="#1F2937" opacity="0.15"/>
+          <path d="M0 0 L-18 210 M0 0 L18 210" stroke="#111827" stroke-width="4" opacity="0.35"/>
+          <path d="M-28 60 L28 60 M-22 100 L22 100 M-16 140 L16 140" stroke="#111827" stroke-width="4" opacity="0.35"/>
+        </g>
+      </g>
+
+      <!-- PLANE (animated) -->
+      <g class="ivb-plane" transform="translate(1180,60)" opacity="0.85">
+        <path d="M0 20 L86 0 L100 6 L52 24 L100 40 L86 46 L0 26 L-18 32 L-25 26 L-18 20 Z"
+              fill="#0F172A" opacity="0.22"/>
+        <path d="M0 20 L86 0 L100 6 L52 24 L100 40 L86 46 L0 26 Z"
+              fill="#F8FAFC" opacity="0.95"/>
+        <circle cx="78" cy="18" r="3" fill="#0F172A" opacity="0.25"/>
+      </g>
+
+      <!-- TRAIN (animated) -->
+      <g class="ivb-train" transform="translate(360,250)" filter="url(#ivbSoftShadow)">
+        <rect x="0" y="-34" width="300" height="62" rx="20" fill="#F97316" opacity="0.95"/>
+        <rect x="18" y="-18" width="70" height="28" rx="8" fill="#0EA5E9" opacity="0.35"/>
+        <rect x="100" y="-18" width="70" height="28" rx="8" fill="#0EA5E9" opacity="0.35"/>
+        <rect x="182" y="-18" width="70" height="28" rx="8" fill="#0EA5E9" opacity="0.35"/>
+        <rect x="0" y="26" width="300" height="10" rx="5" fill="#111827" opacity="0.18"/>
+        <circle cx="60" cy="36" r="10" fill="#111827" opacity="0.25"/>
+        <circle cx="240" cy="36" r="10" fill="#111827" opacity="0.25"/>
+      </g>
+
+      <!-- FOREGROUND GROUND -->
+      <path d="M0 310 C220 280 360 330 560 305 C740 280 910 325 1140 300 C1330 280 1450 320 1600 295 L1600 420 L0 420 Z"
+            fill="url(#ivbGround)"></path>
+
+      <!-- HOUSES -->
+      <g class="ivb-houses" filter="url(#ivbSoftShadow)">
+        <!-- House 1 -->
+        <g transform="translate(230,280)">
+          <rect x="0" y="40" width="170" height="95" rx="14" fill="#FFF7ED" opacity="0.9"/>
+          <path d="M-10 48 L85 -10 L180 48 Z" fill="#FB923C"/>
+          <rect x="18" y="70" width="40" height="30" rx="8" fill="#0EA5E9" opacity="0.3"/>
+          <rect x="112" y="70" width="40" height="30" rx="8" fill="#0EA5E9" opacity="0.3"/>
+          <rect x="74" y="82" width="26" height="54" rx="10" fill="#111827" opacity="0.16"/>
+        </g>
+
+        <!-- House 2 -->
+        <g transform="translate(540,290)">
+          <rect x="0" y="30" width="190" height="105" rx="14" fill="#F8FAFC" opacity="0.9"/>
+          <path d="M-8 40 L95 -22 L198 40 Z" fill="#60A5FA" opacity="0.95"/>
+          <rect x="22" y="68" width="44" height="32" rx="8" fill="#0EA5E9" opacity="0.28"/>
+          <rect x="124" y="68" width="44" height="32" rx="8" fill="#0EA5E9" opacity="0.28"/>
+          <rect x="82" y="84" width="26" height="50" rx="10" fill="#111827" opacity="0.14"/>
+        </g>
+
+        <!-- Small bungalow -->
+        <g transform="translate(820,305)">
+          <rect x="0" y="38" width="150" height="90" rx="14" fill="#FFF7ED" opacity="0.9"/>
+          <path d="M-6 46 L75 -8 L156 46 Z" fill="#F59E0B" opacity="0.95"/>
+          <rect x="18" y="70" width="38" height="28" rx="8" fill="#0EA5E9" opacity="0.24"/>
+          <rect x="94" y="70" width="38" height="28" rx="8" fill="#0EA5E9" opacity="0.24"/>
+          <rect x="62" y="84" width="26" height="44" rx="10" fill="#111827" opacity="0.14"/>
+        </g>
+      </g>
+
+      <!-- SIGNS (blink/pulse) -->
+      <g class="ivb-signs" filter="url(#ivbSoftShadow)">
+        <g transform="translate(120,330)">
+          <rect x="0" y="0" width="140" height="60" rx="12" fill="#F97316"/>
+          <text x="70" y="38" text-anchor="middle" font-size="24" font-weight="800"
+                font-family="ui-sans-serif, system-ui" fill="#FFF">FOR RENT</text>
+          <rect x="64" y="60" width="12" height="40" rx="6" fill="#111827" opacity="0.18"/>
+        </g>
+
+        <g transform="translate(1020,332)" class="ivb-sign ivb-sign--pulse">
+          <rect x="0" y="0" width="190" height="60" rx="12" fill="#22C55E" opacity="0.95"/>
+          <text x="95" y="38" text-anchor="middle" font-size="22" font-weight="900"
+                font-family="ui-sans-serif, system-ui" fill="#052E16">NOW LEASING</text>
+          <rect x="88" y="60" width="12" height="40" rx="6" fill="#111827" opacity="0.18"/>
+        </g>
+
+        <g transform="translate(770,350)">
+          <rect x="0" y="0" width="210" height="54" rx="12" fill="#0EA5E9" opacity="0.75"/>
+          <text x="105" y="35" text-anchor="middle" font-size="20" font-weight="800"
+                font-family="ui-sans-serif, system-ui" fill="#F8FAFC">INLAND VACANCY BOARD</text>
+        </g>
+
+        <!-- “City” plaque (edit text to rotate cities later if you want) -->
+        <g transform="translate(1185,302)">
+          <rect x="0" y="0" width="160" height="56" rx="14" fill="#1D4ED8" opacity="0.65"/>
+          <text x="80" y="36" text-anchor="middle" font-size="22" font-weight="800"
+                font-family="ui-sans-serif, system-ui" fill="#E0F2FE">San Bernardino</text>
+        </g>
+      </g>
+
+      <!-- Subtle foreground bushes for depth -->
+      <g opacity="0.9">
+        <circle cx="330" cy="360" r="38" fill="#166534"/>
+        <circle cx="370" cy="370" r="34" fill="#14532D"/>
+        <circle cx="640" cy="370" r="44" fill="#166534"/>
+        <circle cx="690" cy="360" r="34" fill="#14532D"/>
+        <circle cx="920" cy="372" r="46" fill="#166534"/>
+        <circle cx="970" cy="362" r="36" fill="#14532D"/>
+        <circle cx="1240" cy="372" r="52" fill="#166534"/>
+        <circle cx="1300" cy="362" r="40" fill="#14532D"/>
+      </g>
+    </g>
+  </svg>
+</section>
+
+<style>
+  .ivb-hero{
+    width: 100%;
+    max-width: 1100px;
+    margin: 18px auto 8px;
+    padding: 0 16px;
+  }
+  .ivb-hero__svg{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.16);
+    box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  }
+
+  /* Animations (vector-safe) */
+  .ivb-wheel{
+    transform-origin: 1280px 240px; /* approximate global center after translate */
+    animation: ivbWheelSpin 12s linear infinite;
+  }
+  @keyframes ivbWheelSpin{
+    from{ transform: translate(1160px,120px) rotate(0deg); }
+    to  { transform: translate(1160px,120px) rotate(360deg); }
+  }
+
+  .ivb-cloud--1{ animation: ivbCloudDrift1 38s linear infinite; }
+  .ivb-cloud--2{ animation: ivbCloudDrift2 52s linear infinite; }
+  .ivb-cloud--3{ animation: ivbCloudDrift3 46s linear infinite; }
+
+  @keyframes ivbCloudDrift1{
+    from{ transform: translateX(-160px); }
+    to  { transform: translateX(1760px); }
+  }
+  @keyframes ivbCloudDrift2{
+    from{ transform: translateX(420px); }
+    to  { transform: translateX(-1900px); }
+  }
+  @keyframes ivbCloudDrift3{
+    from{ transform: translateX(0px); }
+    to  { transform: translateX(-1500px); }
+  }
+
+  .ivb-plane{
+    animation: ivbPlane 18s linear infinite;
+  }
+  @keyframes ivbPlane{
+    0%   { transform: translate(-240px,40px) scale(1); opacity: 0; }
+    6%   { opacity: .9; }
+    50%  { transform: translate(780px,10px) scale(1.03); opacity: .9; }
+    94%  { opacity: .9; }
+    100% { transform: translate(1820px,70px) scale(1); opacity: 0; }
+  }
+
+  .ivb-train{
+    animation: ivbTrain 10s ease-in-out infinite;
+  }
+  @keyframes ivbTrain{
+    0%   { transform: translate(260px,250px); }
+    50%  { transform: translate(520px,250px); }
+    100% { transform: translate(260px,250px); }
+  }
+
+  .ivb-mtn--far{
+    animation: ivbParallaxFar 14s ease-in-out infinite;
+  }
+  .ivb-mtn--near{
+    animation: ivbParallaxNear 10s ease-in-out infinite;
+  }
+  @keyframes ivbParallaxFar{
+    0%,100%{ transform: translateX(0px); }
+    50%    { transform: translateX(-18px); }
+  }
+  @keyframes ivbParallaxNear{
+    0%,100%{ transform: translateX(0px); }
+    50%    { transform: translateX(-32px); }
+  }
+
+  .ivb-sign--pulse{
+    transform-origin: center;
+    animation: ivbPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes ivbPulse{
+    0%,100%{ transform: scale(1); filter: none; }
+    50%     { transform: scale(1.03); }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .ivb-wheel, .ivb-cloud--1, .ivb-cloud--2, .ivb-cloud--3,
+    .ivb-plane, .ivb-train, .ivb-mtn--far, .ivb-mtn--near, .ivb-sign--pulse{
+      animation: none !important;
+    }
+  }
+</style>
+<!-- ===== /Inland Vacancy Board • Animated Vector Hero ===== -->
 
   <main>
     <div class="notice">
