@@ -5,40 +5,194 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Listing</title>
   <meta name="description" content="Vacancy listing details." />
+
   <style>
-    :root { color-scheme: light dark; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; line-height: 1.45; }
-    header { padding: 18px 16px; border-bottom: 1px solid rgba(127,127,127,.35); display:flex; gap:12px; align-items:center; flex-wrap: wrap; }
-    header a { text-decoration:none; }
-    header a:hover { text-decoration: underline; }
-    main { padding: 16px; max-width: 1000px; margin: 0 auto; }
-    h1 { margin: 10px 0 6px; font-size: 22px; }
-    .muted { opacity: .8; }
-    .notice { margin: 12px 0; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(127,127,127,.35); }
-    .error { border-color: rgba(220,60,60,.6); }
-    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 12px; }
-    .card { border: 1px solid rgba(127,127,127,.35); border-radius: 14px; padding: 12px; }
-    .kv { display:grid; gap:6px; }
-    .k { font-size: 12px; opacity: .75; }
-    .v { font-size: 15px; }
-    .gallery { display:grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 12px; }
-    .gallery img { width: 100%; height: auto; border-radius: 14px; border: 1px solid rgba(127,127,127,.25); }
-    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
-    th, td { text-align:left; padding: 10px 8px; border-bottom: 1px solid rgba(127,127,127,.25); }
-    th { font-size: 12px; opacity: .8; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .95em; }
-    .actions { display:flex; gap:10px; flex-wrap: wrap; margin-top: 10px; }
-    .btn {
-      display:inline-block; padding: 10px 12px; border-radius: 12px;
-      border: 1px solid rgba(127,127,127,.35); text-decoration:none;
+    /* Theme tokens */
+    :root{
+      --bg: #ffffff;
+      --fg: #0b0f14;
+      --muted: rgba(11,15,20,.75);
+      --border: rgba(127,127,127,.35);
+      --border2: rgba(127,127,127,.25);
+      --surface: rgba(0,0,0,.02);
+      --radius: 14px;
+      color-scheme: light;
     }
-    .btn:hover { text-decoration: underline; }
+    html[data-theme="dark"]{
+      --bg: #0b0f14;
+      --fg: #e9eef5;
+      --muted: rgba(233,238,245,.75);
+      --border: rgba(233,238,245,.35);
+      --border2: rgba(233,238,245,.25);
+      --surface: rgba(255,255,255,.04);
+      color-scheme: dark;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.45;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .muted{ opacity: .8; }
+
+    header{
+      padding: 18px 16px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap: wrap;
+    }
+    header a{ text-decoration:none; color: inherit; }
+    header a:hover{ text-decoration: underline; }
+
+    main{ padding: 16px; max-width: 1000px; margin: 0 auto; }
+
+    h1{ margin: 10px 0 6px; font-size: 22px; }
+
+    .notice{
+      margin: 12px 0;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .error{ border-color: rgba(220,60,60,.6); }
+
+    .grid{
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 12px;
+    }
+    .card{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--surface);
+    }
+    .kv{ display:grid; gap:6px; }
+    .k{ font-size: 12px; opacity: .75; }
+    .v{ font-size: 15px; }
+
+    .gallery{
+      display:grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 12px;
+    }
+    .gallery img{
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .btn{
+      display:inline-block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      text-decoration:none;
+      color: inherit;
+    }
+    .btn:hover{ text-decoration: underline; }
+
+    /* Toggle */
+    .theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:var(--surface);
+    }
+    .theme-toggle span{ font-size:12px; opacity:.85; }
+
+    .switch{
+      position:relative;
+      width:46px;
+      height:26px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      flex: 0 0 auto;
+    }
+    .switch input{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      cursor:pointer;
+    }
+    .knob{
+      position:absolute;
+      top:3px;
+      left:3px;
+      width:20px;
+      height:20px;
+      border-radius:999px;
+      background:currentColor;
+      opacity:.85;
+      transition:transform .18s ease;
+    }
+    .switch input:checked + .knob{ transform:translateX(20px); }
+
+    /* Simple focus */
+    .switch input:focus-visible + .knob{
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
   </style>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("ivb_theme");
+      if (saved === "light" || saved === "dark") {
+        document.documentElement.setAttribute("data-theme", saved);
+      } else {
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
 </head>
+
 <body>
   <header>
     <a href="./index.html">← Back to listings</a>
     <span class="muted">Inland Vacancy Board</span>
+
+    <div class="theme-toggle">
+      <span>Theme</span>
+      <label class="switch">
+        <span class="sr-only">Toggle dark mode</span>
+        <input id="themeSwitch" type="checkbox" aria-label="Toggle dark mode" />
+        <span class="knob" aria-hidden="true"></span>
+      </label>
+    </div>
   </header>
 
   <main>
@@ -58,7 +212,6 @@
 
       <h2 style="margin-top:18px; font-size:18px;">Photos</h2>
       <div class="gallery" id="gallery"></div>
-      
     </section>
   </main>
 
@@ -76,9 +229,23 @@
       meta: document.getElementById("meta"),
       basics: document.getElementById("basics"),
       gallery: document.getElementById("gallery"),
-      allfields: document.getElementById("allfields"),
       actions: document.getElementById("actions"),
     };
+
+    // Theme toggle wiring
+    (function () {
+      const sw = document.getElementById("themeSwitch");
+      if (!sw) return;
+
+      const current = document.documentElement.getAttribute("data-theme");
+      sw.checked = current === "dark";
+
+      sw.addEventListener("change", () => {
+        const next = sw.checked ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("ivb_theme", next);
+      });
+    })();
 
     function parseCSV(csvText) {
       const rows = [];
@@ -139,7 +306,6 @@
 
     function splitPhotos(photosField) {
       // Accept semicolon OR comma separated URLs
-      // Example: https://.../1.jpg;https://.../2.jpg
       const raw = (photosField || "").trim();
       if (!raw) return [];
       const parts = raw.includes(";") ? raw.split(";") : raw.split(",");
@@ -201,15 +367,21 @@
 
         // Action links
         addActionLink("Listing link", (item.listing_url || "").trim());
-        addActionLink("Photos link", (item.photos_url || "").trim());
+
+        // Photos: handle single vs multiple URLs gracefully
+        const photos = splitPhotos(item.photos_url);
+        if (photos.length === 1) {
+          addActionLink("Photo", photos[0]);
+        } else if (photos.length > 1) {
+          addActionLink("First photo", photos[0]);
+        }
+
         if ((item.contact_email || "").trim()) addActionLink("Email", `mailto:${item.contact_email.trim()}`);
-        const callNumber =
-  (item.contact_phone || "").trim() || DEFAULT_OFFICE_PHONE;
 
-addActionLink("Call", `tel:${callNumber}`);
+        const callNumber = (item.contact_phone || "").trim() || DEFAULT_OFFICE_PHONE;
+        addActionLink("Call", `tel:${callNumber}`);
 
-
-        // Basics cards (you can reorder as you like)
+        // Basics cards
         addKV(els.basics, "Rent", money(item.rent_usd));
         addKV(els.basics, "Deposit", money(item.deposit_usd));
         addKV(els.basics, "Beds", textOrDash(item.beds));
@@ -221,19 +393,12 @@ addActionLink("Call", `tel:${callNumber}`);
         addKV(els.basics, "Pets", textOrDash(item.pet_policy));
         addKV(els.basics, "Parking", textOrDash(item.parking));
         addKV(els.basics, "Utilities included", textOrDash(item.utilities_included));
-        const phone =
-  (item.contact_phone || "").trim() || DEFAULT_OFFICE_PHONE;
 
-const contactLabel = [
-  (item.contact_name || "").trim(),
-  phone
-].filter(Boolean).join(" • ");
-
-addKV(els.basics, "Contact", contactLabel);
-
+        const phone = (item.contact_phone || "").trim() || DEFAULT_OFFICE_PHONE;
+        const contactLabel = [(item.contact_name || "").trim(), phone].filter(Boolean).join(" • ");
+        addKV(els.basics, "Contact", contactLabel);
 
         // Photo gallery
-        const photos = splitPhotos(item.photos_url);
         if (!photos.length) {
           const p = document.createElement("p");
           p.className = "muted";
@@ -262,4 +427,3 @@ addKV(els.basics, "Contact", contactLabel);
   </script>
 </body>
 </html>
-
