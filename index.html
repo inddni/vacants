@@ -5,38 +5,153 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Inland Vacancy Board</title>
   <meta name="description" content="Vacancy listings for Pomona, Montclair, Upland, Rancho Cucamonga, Chino, and Riverside. Information purposes only." />
+
   <style>
-    :root { color-scheme: light dark; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; line-height: 1.4; }
-    header { padding: 20px 16px; border-bottom: 1px solid rgba(127,127,127,.35); }
+    /* Theme tokens */
+    :root{
+      --bg: #ffffff;
+      --fg: #0b0f14;
+      --muted: rgba(11,15,20,.75);
+      --border: rgba(127,127,127,.35);
+      --border2: rgba(127,127,127,.25);
+      --surface: rgba(0,0,0,.02);
+      color-scheme: light;
+    }
+    html[data-theme="dark"]{
+      --bg: #0b0f14;
+      --fg: #e9eef5;
+      --muted: rgba(233,238,245,.75);
+      --border: rgba(233,238,245,.35);
+      --border2: rgba(233,238,245,.25);
+      --surface: rgba(255,255,255,.04);
+      color-scheme: dark;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 0;
+      line-height: 1.4;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    header {
+      padding: 20px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
     header h1 { margin: 0 0 6px; font-size: 20px; }
     header p { margin: 0; opacity: .85; font-size: 14px; }
+
     main { padding: 16px; max-width: 1100px; margin: 0 auto; }
+
     .bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 12px 0 16px; }
     .field { display: grid; gap: 6px; }
     label { font-size: 12px; opacity: .8; }
-    input, select, button {
-      font: inherit; padding: 10px 12px; border-radius: 10px;
-      border: 1px solid rgba(127,127,127,.35); background: transparent;
+
+    input, select, button{
+      font: inherit;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: inherit;
     }
     button { cursor: pointer; }
+
     table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid rgba(127,127,127,.25); vertical-align: top; }
+    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border2); vertical-align: top; }
     th { font-size: 12px; opacity: .8; letter-spacing: .02em; }
+
     .muted { opacity: .75; }
-    .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid rgba(127,127,127,.35); font-size: 12px; }
-    .row-actions a { text-decoration: none; }
+    .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--border); font-size: 12px; }
+    .row-actions a { text-decoration: none; color: inherit; }
     .row-actions a:hover { text-decoration: underline; }
-    footer { padding: 18px 16px; border-top: 1px solid rgba(127,127,127,.35); font-size: 13px; opacity: .85; }
-    .notice { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(127,127,127,.35); }
+
+    footer { padding: 18px 16px; border-top: 1px solid var(--border); font-size: 13px; opacity: .85; }
+
+    .notice { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); }
     .error { border-color: rgba(220,60,60,.6); }
     .loading { opacity: .75; }
+
+    /* Theme toggle */
+    .theme-toggle{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      user-select: none;
+    }
+    .theme-toggle span{ font-size: 12px; opacity: .85; }
+
+    .switch{
+      position: relative;
+      width: 46px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      display: inline-block;
+    }
+    .switch input{
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      margin: 0;
+    }
+    .knob{
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: .85;
+      transition: transform .18s ease;
+    }
+    .switch input:checked + .knob{
+      transform: translateX(20px);
+    }
   </style>
+
+  <script>
+    // Apply saved theme ASAP to avoid flash
+    (function () {
+      const saved = localStorage.getItem("ivb_theme"); // "light" | "dark" | null
+      if (saved === "light" || saved === "dark") {
+        document.documentElement.setAttribute("data-theme", saved);
+      } else {
+        // default to system preference
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      }
+    })();
+  </script>
 </head>
+
 <body>
   <header>
-    <h1>Inland Vacancy Board</h1>
-    <p class="muted">Pomona • Montclair • Upland • Rancho Cucamonga • Chino • Riverside</p>
+    <div>
+      <h1>Inland Vacancy Board</h1>
+      <p class="muted">Pomona • Montclair • Upland • Rancho Cucamonga • Chino • Riverside</p>
+    </div>
+
+    <div class="theme-toggle" aria-label="Theme toggle">
+      <span id="themeLabel">Theme</span>
+      <label class="switch" aria-label="Toggle dark mode">
+        <input id="themeSwitch" type="checkbox" />
+        <span class="knob" aria-hidden="true"></span>
+      </label>
+    </div>
   </header>
 
   <main>
@@ -86,7 +201,7 @@
 
     <div id="state" class="notice loading">Loading listings…</div>
 
-    <div style="overflow:auto; border-radius: 12px; border: 1px solid rgba(127,127,127,.35); margin-top: 12px;">
+    <div style="overflow:auto; border-radius: 12px; border: 1px solid var(--border); margin-top: 12px;">
       <table aria-label="Vacancy listings table">
         <thead>
           <tr>
@@ -108,6 +223,19 @@
   </footer>
 
   <script>
+    // Theme switch wiring
+    (function () {
+      const sw = document.getElementById("themeSwitch");
+      const current = document.documentElement.getAttribute("data-theme");
+      sw.checked = current === "dark";
+
+      sw.addEventListener("change", () => {
+        const next = sw.checked ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("ivb_theme", next);
+      });
+    })();
+
     const CSV_PATH = "./resources/listings.csv";
 
     const els = {
@@ -121,7 +249,6 @@
     };
 
     function parseCSV(csvText) {
-      // Robust-enough CSV parser for quoted fields with commas.
       const rows = [];
       let row = [];
       let field = "";
@@ -141,13 +268,11 @@
         if (c === '"') { inQuotes = true; continue; }
         if (c === ",") { row.push(field); field = ""; continue; }
         if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; continue; }
-        if (c === "\r") { continue; } // ignore
+        if (c === "\r") { continue; }
         field += c;
       }
-      // last field
       if (field.length || row.length) { row.push(field); rows.push(row); }
 
-      // Trim empty trailing rows
       while (rows.length && rows[rows.length - 1].every(v => !String(v).trim())) rows.pop();
 
       if (!rows.length) return [];
@@ -247,7 +372,6 @@
 
         const all = parseCSV(text);
 
-        // Default: show vacant first; user can change Status dropdown
         const allowedCities = new Set(["Pomona","Montclair","Upland","Rancho Cucamonga","Chino","Riverside"]);
         const cleaned = all.filter(it => allowedCities.has((it.city || "").trim()));
 
@@ -287,4 +411,3 @@
   </script>
 </body>
 </html>
-
