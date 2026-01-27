@@ -7,26 +7,143 @@
   <meta name="description" content="Vacancy listings for Pomona, Montclair, Upland, Rancho Cucamonga, Chino, and Riverside. Information purposes only." />
 
   <style>
-    /* Theme tokens */
-    :root{
-      --bg: #ffffff;
-      --fg: #0b0f14;
-      --muted: rgba(11,15,20,.75);
-      --border: rgba(127,127,127,.35);
-      --border2: rgba(127,127,127,.25);
-      --surface: rgba(0,0,0,.02);
-      color-scheme: light;
-    }
-    html[data-theme="dark"]{
-      --bg: #0b0f14;
-      --fg: #e9eef5;
-      --muted: rgba(233,238,245,.75);
-      --border: rgba(233,238,245,.35);
-      --border2: rgba(233,238,245,.25);
-      --surface: rgba(255,255,255,.04);
-      color-scheme: dark;
-    }
-.ivb-hero{
+  /* Theme tokens */
+  :root{
+    --bg: #ffffff;
+    --fg: #0b0f14;
+    --muted: rgba(11,15,20,.75);
+    --border: rgba(127,127,127,.35);
+    --border2: rgba(127,127,127,.25);
+    --surface: rgba(0,0,0,.02);
+    color-scheme: light;
+  }
+  html[data-theme="dark"]{
+    --bg: #0b0f14;
+    --fg: #e9eef5;
+    --muted: rgba(233,238,245,.75);
+    --border: rgba(233,238,245,.35);
+    --border2: rgba(233,238,245,.25);
+    --surface: rgba(255,255,255,.04);
+    color-scheme: dark;
+  }
+
+  body{
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    margin: 0;
+    line-height: 1.4;
+    background: var(--bg);
+    color: var(--fg);
+  }
+
+  header{
+    padding: 20px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  header h1{ margin: 0 0 6px; font-size: 20px; }
+  header p{ margin: 0; opacity: .85; font-size: 14px; }
+
+  main{ padding: 16px; max-width: 1100px; margin: 0 auto; }
+
+  .bar{ display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 12px 0 16px; }
+  .field{ display: grid; gap: 6px; }
+  label{ font-size: 12px; opacity: .8; }
+
+  input, select, button{
+    font: inherit;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: inherit;
+  }
+  button{ cursor: pointer; }
+
+  table{ width: 100%; border-collapse: collapse; }
+  th, td{
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border2);
+    vertical-align: top;
+  }
+  th{ font-size: 12px; opacity: .8; letter-spacing: .02em; }
+
+  .muted{ opacity: .75; }
+  .pill{
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .row-actions a{ text-decoration: none; color: inherit; }
+  .row-actions a:hover{ text-decoration: underline; }
+
+  footer{
+    padding: 18px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    opacity: .85;
+  }
+
+  .notice{
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .error{ border-color: rgba(220,60,60,.6); }
+  .loading{ opacity: .75; }
+
+  /* Theme toggle */
+  .theme-toggle{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    user-select: none;
+  }
+  .theme-toggle span{ font-size: 12px; opacity: .85; }
+
+  .switch{
+    position: relative;
+    width: 46px;
+    height: 26px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    display: inline-block;
+  }
+  .switch input{
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+  }
+  .knob{
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: .85;
+    transition: transform .18s ease;
+  }
+  .switch input:checked + .knob{ transform: translateX(20px); }
+
+  /* Hero */
+  .ivb-hero{
     width: 100%;
     max-width: 1100px;
     margin: 18px auto 8px;
@@ -38,8 +155,30 @@
     display: block;
     border-radius: 22px;
     border: 1px solid var(--border);
-background: var(--surface);
+    background: var(--surface);
     box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  }
+
+  /* Animations */
+  .ivb-wheel__rot{
+    transform-box: fill-box;
+    /* NOTE: if your wheel is an SVG group, prefer: transform-origin: center; */
+    transform-origin: 120px 120px;
+    animation: ivbWheelSpin 12s linear infinite;
+  }
+  @keyframes ivbWheelSpin{
+    from{ transform: rotate(0deg); }
+    to  { transform: rotate(360deg); }
+  }
+
+  .ivb-gondola{
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ivbGondolaUpright 12s linear infinite;
+  }
+  @keyframes ivbGondolaUpright{
+    from{ transform: rotate(0deg); }
+    to  { transform: rotate(-360deg); }
   }
 
   .ivb-cloud--1{ animation: ivbCloudDrift1 38s linear infinite; }
@@ -59,9 +198,7 @@ background: var(--surface);
     to  { transform: translateX(-1500px); }
   }
 
-  .ivb-plane{
-    animation: ivbPlane 18s linear infinite;
-  }
+  .ivb-plane{ animation: ivbPlane 18s linear infinite; }
   @keyframes ivbPlane{
     0%   { transform: translate(-240px,40px) scale(1); opacity: 0; }
     6%   { opacity: .9; }
@@ -70,21 +207,17 @@ background: var(--surface);
     100% { transform: translate(1820px,70px) scale(1); opacity: 0; }
   }
 
-  .ivb-train{
-    animation: ivbTrain 10s ease-in-out infinite;
-  }
+  /* If your train is already positioned in the SVG, use translateX only */
+  .ivb-train{ animation: ivbTrain 10s ease-in-out infinite; }
   @keyframes ivbTrain{
-    0%   { transform: translate(260px,250px); }
-    50%  { transform: translate(520px,250px); }
-    100% { transform: translate(260px,250px); }
+    0%   { transform: translateX(0px); }
+    50%  { transform: translateX(260px); }
+    100% { transform: translateX(0px); }
   }
 
-  .ivb-mtn--far{
-    animation: ivbParallaxFar 14s ease-in-out infinite;
-  }
-  .ivb-mtn--near{
-    animation: ivbParallaxNear 10s ease-in-out infinite;
-  }
+  .ivb-mtn--far{ animation: ivbParallaxFar 14s ease-in-out infinite; }
+  .ivb-mtn--near{ animation: ivbParallaxNear 10s ease-in-out infinite; }
+
   @keyframes ivbParallaxFar{
     0%,100%{ transform: translateX(0px); }
     50%    { transform: translateX(-18px); }
@@ -100,111 +233,23 @@ background: var(--surface);
   }
   @keyframes ivbPulse{
     0%,100%{ transform: scale(1); filter: none; }
-    50%     { transform: scale(1.03); }
+    50%    { transform: scale(1.03); }
   }
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
-    .ivb-wheel, .ivb-cloud--1, .ivb-cloud--2, .ivb-cloud--3,
-    .ivb-plane, .ivb-train, .ivb-mtn--far, .ivb-mtn--near, .ivb-sign--pulse{
+    .ivb-wheel__rot,
+    .ivb-gondola,
+    .ivb-cloud--1, .ivb-cloud--2, .ivb-cloud--3,
+    .ivb-plane, .ivb-train,
+    .ivb-mtn--far, .ivb-mtn--near,
+    .ivb-sign--pulse{
       animation: none !important;
+      transform: none !important;
     }
   }
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      margin: 0;
-      line-height: 1.4;
-      background: var(--bg);
-      color: var(--fg);
-    }
+</style>
 
-    header {
-      padding: 20px 16px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    header h1 { margin: 0 0 6px; font-size: 20px; }
-    header p { margin: 0; opacity: .85; font-size: 14px; }
-
-    main { padding: 16px; max-width: 1100px; margin: 0 auto; }
-
-    .bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin: 12px 0 16px; }
-    .field { display: grid; gap: 6px; }
-    label { font-size: 12px; opacity: .8; }
-
-    input, select, button{
-      font: inherit;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: inherit;
-    }
-    button { cursor: pointer; }
-
-    table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border2); vertical-align: top; }
-    th { font-size: 12px; opacity: .8; letter-spacing: .02em; }
-
-    .muted { opacity: .75; }
-    .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--border); font-size: 12px; }
-    .row-actions a { text-decoration: none; color: inherit; }
-    .row-actions a:hover { text-decoration: underline; }
-
-    footer { padding: 18px 16px; border-top: 1px solid var(--border); font-size: 13px; opacity: .85; }
-
-    .notice { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); }
-    .error { border-color: rgba(220,60,60,.6); }
-    .loading { opacity: .75; }
-
-    /* Theme toggle */
-    .theme-toggle{
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--surface);
-      user-select: none;
-    }
-    .theme-toggle span{ font-size: 12px; opacity: .85; }
-
-    .switch{
-      position: relative;
-      width: 46px;
-      height: 26px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
-      display: inline-block;
-    }
-    .switch input{
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      margin: 0;
-    }
-    .knob{
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      background: currentColor;
-      opacity: .85;
-      transition: transform .18s ease;
-    }
-    .switch input:checked + .knob{
-      transform: translateX(20px);
-    }
-  </style>
 
   <script>
     // Apply saved theme ASAP to avoid flash
@@ -373,20 +418,6 @@ background: var(--surface);
   <path d="M120 210 L95 270 L145 270 Z" fill="#111827" opacity="0.16"/>
 </g>
 
-<style>
-  .ivb-wheel__rot{
-    transform-box: fill-box;
-    transform-origin: 120px 120px;
-    animation: ivbSpin 9s linear infinite;
-  }
-  @keyframes ivbSpin{
-    from{ transform: rotate(0deg); }
-    to  { transform: rotate(360deg); }
-  }
-</style>
-
-
-
         <!-- Power tower -->
         <g transform="translate(1510,175)" opacity="0.65">
           <path d="M0 0 L-28 210 L28 210 Z" fill="#1F2937" opacity="0.15"/>
@@ -496,7 +527,7 @@ background: var(--surface);
         
         <g transform="translate(770,350)">
           <rect x="0" y="0" width="310" height="54" rx="12" fill="#0EA5E9" opacity="0.75"/>
-          <text x="120" y="35" text-anchor="middle" font-size="20" font-weight="800"
+          <text x="155" y="35" text-anchor="middle" font-size="20" font-weight="800"
                 font-family="ui-sans-serif, system-ui" fill="#F8FAFC">INLAND VACANCY BOARD</text>
         </g>
 
@@ -511,104 +542,7 @@ background: var(--surface);
   </svg>
 </section>
 
-<style>
-  .ivb-hero{
-    width: 100%;
-    max-width: 1100px;
-    margin: 18px auto 8px;
-    padding: 0 16px;
-  }
-  .ivb-hero__svg{
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 22px;
-    border: 1px solid rgba(255,255,255,.10);
-    background: rgba(0,0,0,.16);
-    box-shadow: 0 18px 60px rgba(0,0,0,.35);
-  }
 
-  /* Animations (vector-safe) */
-  .ivb-wheel__rot{
-  animation: ivbWheelSpin 12s linear infinite;
-  transform-origin: 120px 120px;
-  transform-box: fill-box;
-}
-@keyframes ivbWheelSpin{
-  from{ transform: rotate(0deg); }
-  to  { transform: rotate(360deg); }
-}
-
-
-  .ivb-cloud--1{ animation: ivbCloudDrift1 38s linear infinite; }
-  .ivb-cloud--2{ animation: ivbCloudDrift2 52s linear infinite; }
-  .ivb-cloud--3{ animation: ivbCloudDrift3 46s linear infinite; }
-
-  @keyframes ivbCloudDrift1{
-    from{ transform: translateX(-160px); }
-    to  { transform: translateX(1760px); }
-  }
-  @keyframes ivbCloudDrift2{
-    from{ transform: translateX(420px); }
-    to  { transform: translateX(-1900px); }
-  }
-  @keyframes ivbCloudDrift3{
-    from{ transform: translateX(0px); }
-    to  { transform: translateX(-1500px); }
-  }
-
-  .ivb-plane{
-    animation: ivbPlane 18s linear infinite;
-  }
-  @keyframes ivbPlane{
-    0%   { transform: translate(-240px,40px) scale(1); opacity: 0; }
-    6%   { opacity: .9; }
-    50%  { transform: translate(780px,10px) scale(1.03); opacity: .9; }
-    94%  { opacity: .9; }
-    100% { transform: translate(1820px,70px) scale(1); opacity: 0; }
-  }
-
-  .ivb-train{
-    animation: ivbTrain 10s ease-in-out infinite;
-  }
-  @keyframes ivbTrain{
-    0%   { transform: translate(260px,250px); }
-    50%  { transform: translate(520px,250px); }
-    100% { transform: translate(260px,250px); }
-  }
-
-  .ivb-mtn--far{
-    animation: ivbParallaxFar 14s ease-in-out infinite;
-  }
-  .ivb-mtn--near{
-    animation: ivbParallaxNear 10s ease-in-out infinite;
-  }
-  @keyframes ivbParallaxFar{
-    0%,100%{ transform: translateX(0px); }
-    50%    { transform: translateX(-18px); }
-  }
-  @keyframes ivbParallaxNear{
-    0%,100%{ transform: translateX(0px); }
-    50%    { transform: translateX(-32px); }
-  }
-
-  .ivb-sign--pulse{
-    transform-origin: center;
-    animation: ivbPulse 1.6s ease-in-out infinite;
-  }
-  @keyframes ivbPulse{
-    0%,100%{ transform: scale(1); filter: none; }
-    50%     { transform: scale(1.03); }
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce){
-    .ivb-wheel, .ivb-cloud--1, .ivb-cloud--2, .ivb-cloud--3,
-    .ivb-plane, .ivb-train, .ivb-mtn--far, .ivb-mtn--near, .ivb-sign--pulse{
-      animation: none !important;
-    }
-  }
-</style>
 <!-- ===== /Inland Vacancy Board • Animated Vector Hero ===== -->
 
   <main>
