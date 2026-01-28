@@ -160,11 +160,12 @@
   }
 
   /* Animations */
+  /* Ferris wheel — rotate around true center of its own bounding box */
   .ivb-wheel__rot{
     transform-box: fill-box;
-    /* NOTE: if your wheel is an SVG group, prefer: transform-origin: center; */
-    transform-origin: 120px 120px;
+    transform-origin: center;
     animation: ivbWheelSpin 12s linear infinite;
+    will-change: transform;
   }
   @keyframes ivbWheelSpin{
     from{ transform: rotate(0deg); }
@@ -175,6 +176,7 @@
     transform-box: fill-box;
     transform-origin: center;
     animation: ivbGondolaUpright 12s linear infinite;
+    will-change: transform;
   }
   @keyframes ivbGondolaUpright{
     from{ transform: rotate(0deg); }
@@ -207,12 +209,16 @@
     100% { transform: translate(1820px,70px) scale(1); opacity: 0; }
   }
 
-  /* If your train is already positioned in the SVG, use translateX only */
-  .ivb-train{ animation: ivbTrain 10s ease-in-out infinite; }
-  @keyframes ivbTrain{
-    0%   { transform: translateX(0px); }
-    50%  { transform: translateX(260px); }
-    100% { transform: translateX(0px); }
+  /* Train — ride the ground, move LEFT, exit screen, re-enter from RIGHT */
+  .ivb-train{
+    animation: ivbTrainLeft 14s linear infinite;
+    will-change: transform;
+  }
+  @keyframes ivbTrainLeft{
+    0%   { transform: translateX(1780px); opacity: 0; }
+    5%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { transform: translateX(-520px); opacity: 0; }
   }
 
   .ivb-mtn--far{ animation: ivbParallaxFar 14s ease-in-out infinite; }
@@ -246,10 +252,10 @@
     .ivb-sign--pulse{
       animation: none !important;
       transform: none !important;
+      opacity: 1 !important;
     }
   }
 </style>
-
 
   <script>
     // Apply saved theme ASAP to avoid flash
@@ -281,6 +287,7 @@
       </label>
     </div>
   </header>
+
 <!-- ===== Inland Vacancy Board • Animated Vector Hero (drop-in) ===== -->
 <section class="ivb-hero" aria-label="Inland Vacancy Board hero illustration">
   <svg class="ivb-hero__svg" viewBox="0 0 1600 420" role="img" aria-label="Inland region housing collage illustration">
@@ -383,40 +390,39 @@
           <rect x="82" y="110" width="46" height="55" rx="10" fill="#1F2937" opacity="0.18"/>
         </g>
 
-        <!-- Ferris wheel (fixed rotation) -->
-<g class="ivb-wheel" transform="translate(1160,120)">
-  <!-- Rotate around the wheel center (120,120) -->
-  <g class="ivb-wheel__rot">
-    <circle cx="120" cy="120" r="95" fill="none" stroke="#1F2937" stroke-width="8" opacity="0.25"/>
-    <circle cx="120" cy="120" r="90" fill="none" stroke="#111827" stroke-width="4" opacity="0.35"/>
-    <circle cx="120" cy="120" r="10" fill="#111827" opacity="0.35"/>
+        <!-- Ferris wheel (rotation fixed via CSS transform-origin:center) -->
+        <g class="ivb-wheel" transform="translate(1160,120)">
+          <g class="ivb-wheel__rot">
+            <circle cx="120" cy="120" r="95" fill="none" stroke="#1F2937" stroke-width="8" opacity="0.25"/>
+            <circle cx="120" cy="120" r="90" fill="none" stroke="#111827" stroke-width="4" opacity="0.35"/>
+            <circle cx="120" cy="120" r="10" fill="#111827" opacity="0.35"/>
 
-    <g opacity="0.5" stroke="#111827" stroke-width="3">
-      <line x1="120" y1="120" x2="120" y2="30"/>
-      <line x1="120" y1="120" x2="190" y2="60"/>
-      <line x1="120" y1="120" x2="210" y2="120"/>
-      <line x1="120" y1="120" x2="190" y2="180"/>
-      <line x1="120" y1="120" x2="120" y2="210"/>
-      <line x1="120" y1="120" x2="60"  y2="190"/>
-      <line x1="120" y1="120" x2="30"  y2="120"/>
-      <line x1="120" y1="120" x2="60"  y2="60"/>
-    </g>
+            <g opacity="0.5" stroke="#111827" stroke-width="3">
+              <line x1="120" y1="120" x2="120" y2="30"/>
+              <line x1="120" y1="120" x2="190" y2="60"/>
+              <line x1="120" y1="120" x2="210" y2="120"/>
+              <line x1="120" y1="120" x2="190" y2="180"/>
+              <line x1="120" y1="120" x2="120" y2="210"/>
+              <line x1="120" y1="120" x2="60"  y2="190"/>
+              <line x1="120" y1="120" x2="30"  y2="120"/>
+              <line x1="120" y1="120" x2="60"  y2="60"/>
+            </g>
 
-    <g>
-      <rect x="112" y="18"  width="16" height="14" rx="4" fill="#FB923C"/>
-      <rect x="188" y="54"  width="16" height="14" rx="4" fill="#F97316"/>
-      <rect x="210" y="112" width="16" height="14" rx="4" fill="#FB923C"/>
-      <rect x="188" y="172" width="16" height="14" rx="4" fill="#F97316"/>
-      <rect x="112" y="210" width="16" height="14" rx="4" fill="#FB923C"/>
-      <rect x="52"  y="172" width="16" height="14" rx="4" fill="#F97316"/>
-      <rect x="14"  y="112" width="16" height="14" rx="4" fill="#FB923C"/>
-      <rect x="52"  y="54"  width="16" height="14" rx="4" fill="#F97316"/>
-    </g>
-  </g>
+            <g>
+              <rect x="112" y="18"  width="16" height="14" rx="4" fill="#FB923C"/>
+              <rect x="188" y="54"  width="16" height="14" rx="4" fill="#F97316"/>
+              <rect x="210" y="112" width="16" height="14" rx="4" fill="#FB923C"/>
+              <rect x="188" y="172" width="16" height="14" rx="4" fill="#F97316"/>
+              <rect x="112" y="210" width="16" height="14" rx="4" fill="#FB923C"/>
+              <rect x="52"  y="172" width="16" height="14" rx="4" fill="#F97316"/>
+              <rect x="14"  y="112" width="16" height="14" rx="4" fill="#FB923C"/>
+              <rect x="52"  y="54"  width="16" height="14" rx="4" fill="#F97316"/>
+            </g>
+          </g>
 
-  <!-- stand stays static -->
-  <path d="M120 210 L95 270 L145 270 Z" fill="#111827" opacity="0.16"/>
-</g>
+          <!-- stand stays static -->
+          <path d="M120 210 L95 270 L145 270 Z" fill="#111827" opacity="0.16"/>
+        </g>
 
         <!-- Power tower -->
         <g transform="translate(1510,175)" opacity="0.65">
@@ -435,8 +441,9 @@
         <circle cx="78" cy="18" r="3" fill="#0F172A" opacity="0.25"/>
       </g>
 
-      <!-- TRAIN (animated) -->
-      <g class="ivb-train" transform="translate(360,250)" filter="url(#ivbSoftShadow)">
+      <!-- TRAIN (animated) — moved to ground -->
+      <!-- Place the train just above the ground band (y ~ 310). This group position is "ground level". -->
+      <g class="ivb-train" transform="translate(0,334)" filter="url(#ivbSoftShadow)">
         <rect x="0" y="-34" width="300" height="62" rx="20" fill="#F97316" opacity="0.95"/>
         <rect x="18" y="-18" width="70" height="28" rx="8" fill="#0EA5E9" opacity="0.35"/>
         <rect x="100" y="-18" width="70" height="28" rx="8" fill="#0EA5E9" opacity="0.35"/>
@@ -479,6 +486,7 @@
           <rect x="62" y="84" width="26" height="44" rx="10" fill="#111827" opacity="0.14"/>
         </g>
       </g>
+
       <!-- Subtle foreground bushes for depth -->
       <g opacity="0.9">
         <circle cx="330" cy="360" r="38" fill="#166534"/>
@@ -490,6 +498,7 @@
         <circle cx="1240" cy="372" r="52" fill="#166534"/>
         <circle cx="1300" cy="362" r="40" fill="#14532D"/>
       </g>
+
       <!-- SIGNS (blink/pulse) -->
       <g class="ivb-signs" filter="url(#ivbSoftShadow)">
         <g transform="translate(120,330)">
@@ -505,7 +514,8 @@
                 font-family="ui-sans-serif, system-ui" fill="#052E16">NOW LEASING</text>
           <rect x="88" y="60" width="12" height="40" rx="6" fill="#111827" opacity="0.18"/>
         </g>
-<!-- Route 66 sign -->
+
+        <!-- Route 66 sign -->
         <g transform="translate(1340,210)" filter="url(#ivbSoftShadow)">
           <path d="M120 0
                    C155 0 170 18 170 42
@@ -524,14 +534,14 @@
           <text x="85" y="42" font-size="22" font-family="ui-sans-serif, system-ui" fill="#111827" opacity="0.85" text-anchor="middle">ROUTE</text>
           <text x="85" y="78" font-size="44" font-weight="800" font-family="ui-sans-serif, system-ui" fill="#111827" opacity="0.9" text-anchor="middle">66</text>
         </g>
-        
+
         <g transform="translate(770,350)">
           <rect x="0" y="0" width="310" height="54" rx="12" fill="#0EA5E9" opacity="0.75"/>
           <text x="155" y="35" text-anchor="middle" font-size="20" font-weight="800"
                 font-family="ui-sans-serif, system-ui" fill="#F8FAFC">INLAND VACANCY BOARD</text>
         </g>
 
-        <!-- “City” plaque (edit text to rotate cities later if you want) -->
+        <!-- “City” plaque -->
         <g transform="translate(1185,302)">
           <rect x="0" y="0" width="160" height="56" rx="14" fill="#1D4ED8" opacity="0.65"/>
           <text x="80" y="36" text-anchor="middle" font-size="22" font-weight="800"
@@ -541,8 +551,6 @@
     </g>
   </svg>
 </section>
-
-
 <!-- ===== /Inland Vacancy Board • Animated Vector Hero ===== -->
 
   <main>
