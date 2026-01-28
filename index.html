@@ -432,22 +432,26 @@
         </g>
       </g>
 
-      <!-- PLANE (animated) -->
-<g class="ivb-plane" transform="translate(1280,60) translate(120,0) scale(-1,1)" opacity="0.9">
+      <!-- PLANE (animated) — mirror wing + tail only -->
+<g class="ivb-plane" opacity="0.9">
 
-  <!-- wing -->
-  <path d="M18 22 L118 6 L132 10 L54 26 Z"
-        fill="#F8FAFC"/>
+  <!-- MAIN WING (mirrored) -->
+  <g transform="translate(132,0) scale(-1,1)">
+    <path d="M18 22 L118 6 L132 10 L54 26 Z"
+          fill="#F8FAFC"/>
+  </g>
 
-  <!-- fuselage -->
+  <!-- fuselage (unchanged) -->
   <rect x="0" y="18" width="120" height="10" rx="5"
         fill="#F8FAFC"/>
 
-  <!-- tail wing -->
-  <path d="M6 18 L28 12 L32 14 L14 22 Z"
-        fill="#F8FAFC"/>
+  <!-- tail wing (mirrored) -->
+  <g transform="translate(32,0) scale(-1,1)">
+    <path d="M6 18 L28 12 L32 14 L14 22 Z"
+          fill="#F8FAFC"/>
+  </g>
 
-  <!-- vertical stabilizer -->
+  <!-- vertical stabilizer (unchanged) -->
   <path d="M8 18 L18 6 L22 6 L14 18 Z"
         fill="#E5E7EB"/>
 
@@ -455,6 +459,7 @@
   <circle cx="72" cy="28" r="3.2"
           fill="#0F172A" opacity="0.25"/>
 </g>
+
 
 
 
