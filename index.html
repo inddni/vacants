@@ -433,18 +433,29 @@
       </g>
 
       <!-- PLANE (animated) -->
-<g class="ivb-plane" transform="translate(1280,60) scale(-1,1)" opacity="0.9">
-  <!-- shadow / underside -->
-  <path d="M6 22 L118 6 L92 23 L118 40 L6 28 L34 22 Z"
-        fill="#0F172A" opacity="0.22"/>
-  <!-- main body -->
-  <path d="M0 22 L120 4 L90 22 L120 40 L0 28 L30 22 Z"
-        fill="#F8FAFC" opacity="0.98"/>
-  <!-- cockpit / detail -->
-  <path d="M74 18 L92 22 L74 26 Z"
-        fill="#0F172A" opacity="0.18"/>
-  <circle cx="92" cy="20" r="2.4" fill="#0F172A" opacity="0.22"/>
+<g class="ivb-plane" transform="translate(1280,60) translate(120,0) scale(-1,1)" opacity="0.9">
+
+  <!-- wing -->
+  <path d="M18 22 L118 6 L132 10 L54 26 Z"
+        fill="#F8FAFC"/>
+
+  <!-- fuselage -->
+  <rect x="0" y="18" width="120" height="10" rx="5"
+        fill="#F8FAFC"/>
+
+  <!-- tail wing -->
+  <path d="M6 18 L28 12 L32 14 L14 22 Z"
+        fill="#F8FAFC"/>
+
+  <!-- vertical stabilizer -->
+  <path d="M8 18 L18 6 L22 6 L14 18 Z"
+        fill="#E5E7EB"/>
+
+  <!-- engine / shadow -->
+  <circle cx="72" cy="28" r="3.2"
+          fill="#0F172A" opacity="0.25"/>
 </g>
+
 
 
       <!-- TRAIN (animated) — moved to ground -->
