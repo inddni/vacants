@@ -793,7 +793,7 @@
 
         const all = parseCSV(text);
 
-        const allowedCities = new Set(["Pomona","Montclair","Upland","Rancho Cucamonga","Chino","Riverside"]);
+        const allowedCities = new Set(["Pomona","Montclair","Ontario","Upland","Rancho Cucamonga","Chino","Riverside"]);
         const cleaned = all.filter(it => allowedCities.has((it.city || "").trim()));
 
         if (!cleaned.length) {
