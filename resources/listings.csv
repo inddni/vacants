@@ -1,8 +1,8 @@
 listing_id,status,city,address_line1,address_line2,property_type,beds,baths,sqft,rent_usd,deposit_usd,available_date,lease_term_months,pet_policy,parking,utilities_included,contact_name,contact_phone,contact_email,listing_url,photos_url,notes,updated_at
 0012-0041,Vacant,Pomona,883 S Buena Vista Ave,Apt 41,Apartment,2,1,,2200,1900,2026-02-01,,,,,Gloria,909-670-9171,,,,,2026-02-03
 0085-0022,Vacant,Pomona,694 N Park Ave,Apt 210,Apartment,1,1,,1750,1500,2026-01-20,,,,,Luzma Edith,626-606-4079,,,,,2026-02-03
-0216-0003,Vacant,Pomona,1614 Kingsley Ave,Apt 3,Apartment,1,1,,1775,1800,2026-02-01,,,,,Sonia,909-630-4850,,,,,2026-02-03
-0216-0010,Vacant,Pomona,1614 Kingsley Ave,Apt 10,Apartment,2,1,,2000,1700,2026-02-01,,,,,Sonia,909-630-4850,,,,,2026-02-03
+0216-0003,Not Vacant,Pomona,1614 Kingsley Ave,Apt 3,Apartment,1,1,,1775,1800,2026-02-01,,,,,Sonia,909-630-4850,,,,,2026-02-03
+0216-0010,Not Vacant,Pomona,1614 Kingsley Ave,Apt 10,Apartment,2,1,,2000,1700,2026-02-01,,,,,Sonia,909-630-4850,,,,,2026-02-03
 0335-0018,Vacant,Pomona,1641 E Kingsley Ave,Apt 18,Apartment,1,1,,1750,1400,2026-01-02,,,,,Daisy,909-634-7186,,,,,2026-02-03
 0335-0030,Vacant,Pomona,1641 E Kingsley Ave,Apt 30,Apartment,1,1,,1750,1400,2025-12-01,,,,,Daisy,909-634-7186,,,,,2026-02-03
 0452-0006,Vacant,Pomona,1688 E Kingsley Ave,Apt 6,Apartment,1,1,,1850,1700,2026-02-01,,,,,Sonia,909-630-4850,,,,,2026-02-03
