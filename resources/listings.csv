@@ -4,7 +4,7 @@ listing_id,status,city,address_line1,address_line2,property_type,beds,baths,sqft
 0216-0003,Not Vacant,Pomona,1614 Kingsley Ave,Apt 3,Apartment,1,1,,1775,1800,2026-02-01,,,,,Sonia,909-630-4850,,,,,2026-02-03
 0216-0010,Not Vacant,Pomona,1614 Kingsley Ave,Apt 10,Apartment,2,1,,2000,1700,2026-02-01,,,,,Sonia,909-630-4850,,,,,2026-02-03
 0335-0018,Vacant,Pomona,1641 E Kingsley Ave,Apt 18,Apartment,1,1,,1750,1400,2026-01-02,,,,,Daisy,909-634-7186,,,,,2026-02-03
-0335-0030,Vacant,Pomona,1641 E Kingsley Ave,Apt 30,Apartment,1,1,,1750,1400,2025-12-01,,,,,Daisy,909-634-7186,,,,,2026-02-03
+0335-0030,Not Vacant,Pomona,1641 E Kingsley Ave,Apt 30,Apartment,1,1,,1750,1400,2025-12-01,,,,,Daisy,909-634-7186,,,,,2026-02-03
 0452-0006,Vacant,Pomona,1688 E Kingsley Ave,Apt 6,Apartment,1,1,,1850,1700,2026-02-01,,,,,Sonia,909-630-4850,,,,,2026-02-03
 0491-0023,Vacant,Pomona,1111 S Reservoir St,Apt 23,Apartment,1,1,,1825,1400,2026-01-06,,,,,Yanely,909-541-9058,,,,,2026-02-03
 0491-0028,Vacant,Pomona,1111 S Reservoir St,Apt 28,Apartment,1,1,,1875,1800,2026-02-01,,,,,Yanely,909-541-9058,,,,,2026-02-03
@@ -13,7 +13,7 @@ listing_id,status,city,address_line1,address_line2,property_type,beds,baths,sqft
 2140-0001,Vacant,Pomona,2434 Valhalla St,,House,3,1,1028,3300,2000,2025-12-24,,,,,,,,2026-02-03
 7011-0001,Vacant,Pomona,3243 Merrifield Ave,,House,3,2,1132,3500,1500,2026-02-01,,,,,Office,909-625-3248,,,,,2026-02-03
 4256-0025,Vacant,Upland,270 W Amber Ct,Apt 25,Apartment,1,1,,1850,1400,2025-12-24,,,,,Nazareth,909-828-4888,,,,,2026-02-03
-2403-0001,Vacant,Ontario,2409 S Hope Pl,,House,4,2.5,1721,4200,3000,2026-01-13,,,,,,,,2026-02-03
+2403-0001,Not Vacant,Ontario,2409 S Hope Pl,,House,4,2.5,1721,4200,3000,2026-01-13,,,,,,,,2026-02-03
 0261-0053,Vacant,Ontario,1254 E Elma St,Apt B,Apartment,2,1,,2340,1600,2026-02-01,,,,,Juanita,909-408-9243,,,,,2026-02-03
 0456-0007,Vacant,Ontario,1145 W I St,Apt 7,Apartment,1,1,,1850,1500,2025-12-01,,,,,Olga,909-634-7186,,,,,2026-02-03
 0457-0008,Vacant,Ontario,1161 W I St,Apt 8,Apartment,2,2,,2250,1900,2026-02-01,,,,,Olga,909-634-7186,,,,,2026-02-03
