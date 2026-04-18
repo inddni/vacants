@@ -1,27 +1,27 @@
 listing_id,status,city,address_line1,address_line2,property_type,beds,baths,sqft,rent_usd,deposit_usd,available_date,lease_term_months,pet_policy,parking,utilities_included,contact_name,contact_phone,contact_email,listing_url,photos_url,notes,updated_at
-0166-0003,Vacant,Pomona,646 N San Antonio Ave,#b,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Yissel,9096363427,,,,,2026-04-18
-0216-0009,Vacant,Pomona,1614 Kingsley Ave,#9,Apartment,1,1,,1950,1800,2026-03-23,,,,,,Sonia,9096304850,,,,,2026-04-18
-0334-0002,Vacant,Pomona,1640 Kingsley Ave,#2,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Sonia,9096304850,,,,,2026-04-18
-0335-0011,Vacant,Pomona,1641 E Kingsley Ave,#11,Apartment,1,1,,2150,2000,2026-04-01,,,,,,Office,9096253259,,,,,2026-04-18
-0452-0002,Vacant,Pomona,1688 N Kingsley Ave,#2,Apartment,2,1,,1950,1800,2026-04-01,,,,,,Sonia,9096304850,,,,,2026-04-18
-0452-0005,Vacant,Pomona,1688 N Kingsley Ave,#5,Apartment,1,1,,1950,1800,2026-03-02,,,,,,Sonia,9096304850,,,,,2026-04-18
-0592-0052,Vacant,Pomona,1900 W Orange Grove,#12,Apartment,1,1,,1950,1800,2026-03-23,,,,,,Sandra,7146978643,,,,2026-04-18
-0592-0064,Vacant,Pomona,1900 W Orange Grove,#24,Apartment,1,1,,1950,1800,2026-03-02,,,,,,Sandra,7146978643,,,,,2026-04-18
-0592-0072,Vacant,Pomona,1900 W Orange Grove,#32,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Sandra,7146978643,,,,,2026-04-18
-5843-0004,Vacant,Pomona,636 Linden St,,Apartment,0,1,500,1750,1600,2026-04-01,,,,,,Amara,9097270172,,,,,2026-04-18
-4256-0004,Vacant,Upland,280 W Amber Ct,#4,Apartment,1,1,,1950,1800,2026-03-10,,,,,,Nazareth,9098284888,,,,,2026-04-18
-4256-0020,Vacant,Upland,280 W Amber Ct,#20,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Nazareth,9098284888,,,,,2026-04-18
-4256-0023,Vacant,Upland,270 W Amber Ct,#23,Apartment,1,1,,1950,1800,2026-02-16,,,,,,Nazareth,9098284888,,,,,2026-04-18
-4256-0030,Vacant,Upland,270 W Amber Ct,#30,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Nazareth,9098284888,,,,,2026-04-18
-4256-0031,Vacant,Upland,270 W Amber Ct,#31,Apartment,3,1,,1750,1500,2026-03-03,,,,,,Nazareth,9098284888,,,,,2026-04-18
-1194-0001,Vacant,Ontario,964 W Flora St,,House,3,2,1795,3600,3500,2026-03-11,,,,,, ,,,,,Working On;Approved,2026-04-18
-0215-0006,Vacant,Montclair,4200 Kingsley Ave,#6,Apartment,2,2,,2300,400,2026-04-01,,,,,,Silvia,9098216007,,,,,2026-04-18
-0215-0025,Vacant,Montclair,4240 Kingsley Ave,#5,Apartment,2,2,,2250,2000,2026-04-01,,,,,,Silvia,9098216007,,,,,2026-04-18
-0435-0024,Vacant,Ontario,1722 E 4th St,#4,Apartment,2,1,,2200,2000,2026-04-01,,,,,,Jose,4422649326,,,,,2026-04-18
-0456-0027,Vacant,Ontario,1145 W 1st St,#27,Apartment,1,1,,1550,1300,2026-04-01,,,,,,Olga,9096347186,,,,,2026-04-18
-0458-0034,Vacant,Montclair,4850 Bandera St,#1,Apartment,2,1,,2300,1800,2026-04-01,,,,,,Pablo,9099155935,,,,,2026-04-18
-0500-0015,Vacant,Ontario,1348 E Nocta St,#503,Apartment,2,2,,2350,1500,2026-04-01,,,,,,Mayra,9099270629,,,,,2026-04-18
-1031-0003,Vacant,Ontario,560 West Vesta Street,#3,Apartment,1,1,,1850,1800,2026-04-02,,,,,,Ontario Ca,91762,,,,,2026-04-18
-1031-0007,Vacant,Ontario,560 West Vesta Street,#7,Apartment,2,1,,2100,2000,2026-04-01,,,,,,Rayanne,6266898071,,,,,2026-04-18
-5846-0026,Vacant,Montclair,5160 Bandera St,#26,Apartment,1,1,700,1850,1800,2026-04-01,,,,,,,,,,,2026-04-18
-0941-0001,Vacant,Ontario,237 Acacia St,,House,2,1,884,2900,2000,2026-03-18,,,,,,Ontario Ca,91761,,,,,2026-04-18
+0166-0003,Vacant,Pomona,646 N San Antonio Ave,#b,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Yissel,9096363427,,,,2026-04-18
+0216-0009,Vacant,Pomona,1614 Kingsley Ave,#9,Apartment,1,1,,1950,1800,2026-03-23,,,,,,Sonia,9096304850,,,,2026-04-18
+0334-0002,Vacant,Pomona,1640 Kingsley Ave,#2,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Sonia,9096304850,,,,2026-04-18
+0335-0011,Vacant,Pomona,1641 E Kingsley Ave,#11,Apartment,1,1,,2150,2000,2026-04-01,,,,,,Office,9096253259,,,,2026-04-18
+0452-0002,Vacant,Pomona,1688 N Kingsley Ave,#2,Apartment,2,1,,1950,1800,2026-04-01,,,,,,Sonia,9096304850,,,,2026-04-18
+0452-0005,Vacant,Pomona,1688 N Kingsley Ave,#5,Apartment,1,1,,1950,1800,2026-03-02,,,,,,Sonia,9096304850,,,,2026-04-18
+0592-0052,Vacant,Pomona,1900 W Orange Grove,#12,Apartment,1,1,,1950,1800,2026-03-23,,,,,,Sandra,7146978643,,,2026-04-18
+0592-0064,Vacant,Pomona,1900 W Orange Grove,#24,Apartment,1,1,,1950,1800,2026-03-02,,,,,,Sandra,7146978643,,,,2026-04-18
+0592-0072,Vacant,Pomona,1900 W Orange Grove,#32,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Sandra,7146978643,,,,2026-04-18
+5843-0004,Vacant,Pomona,636 Linden St,,Apartment,0,1,500,1750,1600,2026-04-01,,,,,,Amara,9097270172,,,,2026-04-18
+4256-0004,Vacant,Upland,280 W Amber Ct,#4,Apartment,1,1,,1950,1800,2026-03-10,,,,,,Nazareth,9098284888,,,,2026-04-18
+4256-0020,Vacant,Upland,280 W Amber Ct,#20,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Nazareth,9098284888,,,,2026-04-18
+4256-0023,Vacant,Upland,270 W Amber Ct,#23,Apartment,1,1,,1950,1800,2026-02-16,,,,,,Nazareth,9098284888,,,,2026-04-18
+4256-0030,Vacant,Upland,270 W Amber Ct,#30,Apartment,1,1,,1950,1800,2026-04-01,,,,,,Nazareth,9098284888,,,,2026-04-18
+4256-0031,Vacant,Upland,270 W Amber Ct,#31,Apartment,3,1,,1750,1500,2026-03-03,,,,,,Nazareth,9098284888,,,,2026-04-18
+1194-0001,Vacant,Ontario,964 W Flora St,,House,3,2,1795,3600,3500,2026-03-11,,,,,,,,,,2026-04-18
+0215-0006,Vacant,Montclair,4200 Kingsley Ave,#6,Apartment,2,2,,2300,400,2026-04-01,,,,,,Silvia,9098216007,,,,2026-04-18
+0215-0025,Vacant,Montclair,4240 Kingsley Ave,#5,Apartment,2,2,,2250,2000,2026-04-01,,,,,,Silvia,9098216007,,,,2026-04-18
+0435-0024,Vacant,Ontario,1722 E 4th St,#4,Apartment,2,1,,2200,2000,2026-04-01,,,,,,Jose,4422649326,,,,2026-04-18
+0456-0027,Vacant,Ontario,1145 W 1st St,#27,Apartment,1,1,,1550,1300,2026-04-01,,,,,,Olga,9096347186,,,,2026-04-18
+0458-0034,Vacant,Montclair,4850 Bandera St,#1,Apartment,2,1,,2300,1800,2026-04-01,,,,,,Pablo,9099155935,,,,2026-04-18
+0500-0015,Vacant,Ontario,1348 E Nocta St,#503,Apartment,2,2,,2350,1500,2026-04-01,,,,,,Mayra,9099270629,,,,2026-04-18
+1031-0003,Vacant,Ontario,560 West Vesta Street,#3,Apartment,1,1,,1850,1800,2026-04-02,,,,,,,,,,2026-04-18
+1031-0007,Vacant,Ontario,560 West Vesta Street,#7,Apartment,2,1,,2100,2000,2026-04-01,,,,,,Rayanne,6266898071,,,,2026-04-18
+5846-0026,Vacant,Montclair,5160 Bandera St,#26,Apartment,1,1,700,1850,1800,2026-04-01,,,,,,,,,,2026-04-18
+0941-0001,Vacant,Ontario,237 Acacia St,,House,2,1,884,2900,2000,2026-03-18,,,,,,,,,,2026-04-18
