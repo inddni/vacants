@@ -799,7 +799,7 @@
         if (!cleaned.length) {
           els.state.classList.remove("loading");
           els.state.classList.add("error");
-          els.state.textContent = "No listings found. Check that resources/listings.csv exists and has rows.";
+          els.state.textContent = "No listings are currently available. Please check back soon.";
           renderTable([]);
           return;
         }
@@ -821,9 +821,10 @@
         rerender();
 
       } catch (err) {
+        console.error(err);
         els.state.classList.remove("loading");
         els.state.classList.add("error");
-        els.state.textContent = `Error: ${err.message}`;
+        els.state.textContent = "Listings could not be loaded. Please try again later.";
         renderTable([]);
       }
     }

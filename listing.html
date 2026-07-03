@@ -86,12 +86,16 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       margin-top: 12px;
     }
-    .gallery img{
+    .gallery img,
+    .gallery video{
       width: 100%;
       height: auto;
       border-radius: var(--radius);
       border: 1px solid var(--border);
       background: var(--surface);
+    }
+    .gallery p.muted{
+      grid-column: 1 / -1;
     }
 
     .actions{
@@ -217,6 +221,7 @@
 
   <script>
     const CSV_PATH = "./resources/listings.csv";
+    const MEDIA_CSV_PATH = "./resources/media.csv";
 
     const qs = new URLSearchParams(location.search);
     const listingId = qs.get("id");
@@ -304,6 +309,23 @@
       return [parts, city].filter(Boolean).join(" — ");
     }
 
+    // Category key for shared media: city + beds + property_type.
+    // Blank property_type (data-entry gap) means a listing can never match
+    // a shared category — it will just show "no photos" until fixed.
+    function mediaKey(city, beds, propertyType) {
+      return [city, beds, propertyType]
+        .map(v => (v || "").trim().toLowerCase())
+        .join("|");
+    }
+
+    function buildMediaMap(mediaRows) {
+      const map = new Map();
+      for (const row of mediaRows) {
+        map.set(mediaKey(row.city, row.beds, row.property_type), row);
+      }
+      return map;
+    }
+
     function splitPhotos(photosField) {
       // Accept semicolon OR comma separated URLs
       const raw = (photosField || "").trim();
@@ -339,6 +361,28 @@
       els.actions.appendChild(a);
     }
 
+    // Phone numbers are intentionally NOT written into the DOM as a tel: href
+    // at render time (light mitigation against low-effort scraping). The
+    // href is populated only on user interaction (click/pointerdown).
+    function addCallButton(label, number) {
+      if (!number) return;
+      const a = document.createElement("a");
+      a.className = "btn";
+      a.href = "#";
+      a.textContent = label;
+
+      const reveal = () => { a.href = `tel:${number}`; };
+      a.addEventListener("pointerdown", reveal, { once: true });
+      a.addEventListener("click", (e) => {
+        if (a.getAttribute("href") === "#") {
+          e.preventDefault();
+          reveal();
+        }
+      });
+
+      els.actions.appendChild(a);
+    }
+
     async function main() {
       try {
         if (!listingId) {
@@ -360,6 +404,20 @@
           return;
         }
 
+        // Shared category media (by city + beds + property_type) is optional —
+        // if the file is missing or fails to load, listings still render,
+        // they just fall back to "no photos" instead of shared stock media.
+        let mediaMap = new Map();
+        try {
+          const mediaRes = await fetch(MEDIA_CSV_PATH, { cache: "no-store" });
+          if (mediaRes.ok) {
+            const mediaText = await mediaRes.text();
+            mediaMap = buildMediaMap(parseCSV(mediaText));
+          }
+        } catch (mediaErr) {
+          console.error(mediaErr);
+        }
+
         // Title/meta
         document.title = `${buildAddress(item)} | Inland Vacancy Board`;
         els.title.textContent = buildAddress(item);
@@ -368,8 +426,16 @@
         // Action links
         addActionLink("Listing link", (item.listing_url || "").trim());
 
-        // Photos: handle single vs multiple URLs gracefully
-        const photos = splitPhotos(item.photos_url);
+        // Photos: a listing's own photos_url (real photos for that specific
+        // unit) always takes priority. If it has none, fall back to the
+        // shared stock media for its city + beds + property_type category.
+        const ownPhotos = splitPhotos(item.photos_url);
+        const category = mediaMap.get(mediaKey(item.city, item.beds, item.property_type));
+        const categoryPhotos = category ? splitPhotos(category.photos_url) : [];
+        const categoryVideo = category ? (category.video_url || "").trim() : "";
+        const usingSharedMedia = ownPhotos.length === 0 && categoryPhotos.length > 0;
+        const photos = ownPhotos.length ? ownPhotos : categoryPhotos;
+
         if (photos.length === 1) {
           addActionLink("Photo", photos[0]);
         } else if (photos.length > 1) {
@@ -379,7 +445,7 @@
         if ((item.contact_email || "").trim()) addActionLink("Email", `mailto:${item.contact_email.trim()}`);
 
         const callNumber = (item.contact_phone || "").trim() || DEFAULT_OFFICE_PHONE;
-        addActionLink("Call", `tel:${callNumber}`);
+        addCallButton("Call", callNumber);
 
         // Basics cards
         addKV(els.basics, "Rent", money(item.rent_usd));
@@ -388,9 +454,20 @@
         addKV(els.basics, "Baths", textOrDash(item.baths));
         addKV(els.basics, "Sqft", textOrDash(item.sqft));
         addKV(els.basics, "Available", textOrDash(item.available_date));
-        addKV(els.basics, "Lease term (months)", textOrDash(item.lease_term_months));
+
+        // UI-only default: the company only offers 12-month leases. The CSV
+        // may leave this blank; that does not mean "unknown," it means the
+        // standard term applies. An explicit CSV value always overrides.
+        const leaseTermRaw = (item.lease_term_months || "").trim();
+        addKV(els.basics, "Lease term (months)", leaseTermRaw ? `${leaseTermRaw} months` : "12 months");
+
         addKV(els.basics, "Property type", textOrDash(item.property_type));
-        addKV(els.basics, "Pets", textOrDash(item.pet_policy));
+
+        // Hard company policy: pets are never allowed, regardless of what
+        // any individual CSV row says. This is not a blank-field fallback —
+        // it always displays this value.
+        addKV(els.basics, "Pets", "No pets allowed");
+
         addKV(els.basics, "Parking", textOrDash(item.parking));
         addKV(els.basics, "Utilities included", textOrDash(item.utilities_included));
 
@@ -399,10 +476,17 @@
         addKV(els.basics, "Contact", contactLabel);
 
         // Photo gallery
+        if (usingSharedMedia) {
+          const note = document.createElement("p");
+          note.className = "muted";
+          note.textContent = "Representative photos for this unit type/city. Actual unit may vary.";
+          els.gallery.appendChild(note);
+        }
+
         if (!photos.length) {
           const p = document.createElement("p");
           p.className = "muted";
-          p.textContent = "No photo URLs provided.";
+          p.textContent = "No photos available for this listing yet.";
           els.gallery.appendChild(p);
         } else {
           for (const url of photos) {
@@ -414,12 +498,26 @@
           }
         }
 
+        // Category video (e.g. a walkthrough for that unit type/city).
+        // There's no per-listing video field, so this always comes from
+        // the shared category, regardless of whether photos were overridden.
+        if (categoryVideo) {
+          const video = document.createElement("video");
+          video.src = categoryVideo;
+          video.controls = true;
+          video.muted = true;
+          video.playsInline = true;
+          video.preload = "metadata";
+          els.gallery.appendChild(video);
+        }
+
         els.state.remove();
         els.content.hidden = false;
 
       } catch (err) {
+        console.error(err);
         els.state.classList.add("error");
-        els.state.textContent = `Error: ${err.message}`;
+        els.state.textContent = "Listings could not be loaded. Please try again later.";
       }
     }
 

@@ -1,0 +1,10 @@
+city,beds,property_type,photos_url,video_url,updated_at
+Pomona,1,Apartment,./media/pomona-1bed-apartment/1Bed100.jpeg;./media/pomona-1bed-apartment/1Bed101.jpeg;./media/pomona-1bed-apartment/1Bed102.jpeg;./media/pomona-1bed-apartment/1Bed103.jpeg;./media/pomona-1bed-apartment/1Bed104.jpeg;./media/pomona-1bed-apartment/1Bed105.jpeg,./media/pomona-1bed-apartment/1BedVid.mp4,2026-07-03
+Pomona,2,Apartment,,,
+Pomona,2,House,,,
+Montclair,2,Apartment,,,
+Ontario,1,Apartment,,,
+Ontario,2,Apartment,,,
+Ontario,3,House,,,
+Upland,1,Apartment,,,
+Upland,2,Apartment,,,
