@@ -1,32 +1,16 @@
 listing_id,status,city,address_line1,address_line2,property_type,beds,baths,sqft,rent_usd,deposit_usd,available_date,lease_term_months,pet_policy,parking,utilities_included,contact_name,contact_phone,contact_email,listing_url,photos_url,notes,updated_at
-0012-0004,Vacant,Pomona,883 S. Buena Vista Ave.,#4,Apartment,2,1,,1652,900,2026-06-01,12,,,,"Gloria",909-670-9171,,,,,2026-06-01
-0012-0019,Vacant,Pomona,883 S. Buena Vista Ave.,#19,Apartment,2,1,,2178,1900,2026-06-01,12,,,,"Gloria",909-670-9171,,,,,2026-06-01
-0012-0057,Vacant,Pomona,883 S. Buena Vista Ave.,#57,Apartment,2,1,,1652,900,2026-05-27,12,,,,"Gloria",909-670-9171,,,,,2026-06-01
-0012-0062,Vacant,Pomona,883 S. Buena Vista Ave.,#62,Apartment,2,1,,2300,2100,2026-05-01,12,,,,"Gloria",909-670-9171,,,,Credit approved 2026-05-22,2026-06-01
-0047-0006,Vacant,Pomona,762 La Mesa St.,,Apartment,2,1,,2200,2000,2026-06-01,12,,,,"Amara",909-727-0172,,,,,2026-06-01
-0084-0015,Vacant,Pomona,448 E. 6th St.,#3,Apartment,2,1,,1821,900,2026-06-01,12,,,,"Lucy/Cecilia",626-606-4696,,,,,2026-06-01
-0166-0016,Vacant,Pomona,810 E. Reeves Pl.,#b,Apartment,1,1,,1950,1800,2026-05-29,12,,,,"Yissel",909-636-3427,,,,Credit approved 2026-05-29,2026-06-01
-0320-0052,Vacant,Pomona,720 N San Antonio Ave,#6J,Apartment,1,1,,1950,1800,2026-05-01,12,,,,"Fabiola",909-236-8670,,,,,2026-06-01
-0320-0080,Vacant,Pomona,720 N San Antonio Ave,#10M,Apartment,1,1,,1950,1800,2026-05-05,12,,,,"Fabiola",909-236-8670,,,,,2026-06-01
-0334-0004,Vacant,Pomona,1640 Kingsley Ave,#4,Apartment,1,1,,1875,1800,2026-06-01,12,,,,"Sonia",909-630-4850,,,,,2026-06-01
-0334-0008,Vacant,Pomona,1640 Kingsley Ave,#8,Apartment,1,1,,1950,1800,2026-05-01,12,,,,"Sonia",909-630-4850,,,,Credit approved 2026-05-29,2026-06-01
-0335-0028,Vacant,Pomona,1641 E Kingsley Ave,#28,Apartment,1,1,,1750,1800,2026-06-01,12,,,,"Jaira",909-632-9573,,,,,2026-06-01
-0452-0005,Vacant,Pomona,1688 Kingsley Ave.,#5,Apartment,1,1,,1750,1800,2026-06-01,12,,,,"Sonia",909-630-4850,,,,,2026-06-01
-0592-0006,Vacant,Pomona,1800 W Orange Grove,#6,Apartment,2,1,,2100,1400,2026-05-01,12,,,,"Sandra",714-697-8643,,,,,2026-06-01
-0592-0072,Vacant,Pomona,1900 W Orange Grove,#32,Apartment,1,1,,1950,1800,2026-04-01,12,,,,"Sandra",714-697-8643,,,,,2026-06-01
-8026-0008,Vacant,Pomona,1179 Pasadena St.,#c,Apartment,1,1,,1850,1800,2026-06-01,12,,,,"Carlos",909-970-6180,,,,,2026-06-01
-3180-0001,Vacant,Pomona,590 San Francisco Ave.,,House,2,1,650,2300,2100,2026-05-08,12,,,,,,,,,,2026-06-01
-4256-0010,Vacant,Upland,270 W Amber Ct,#10,Apartment,1,1,,1950,1800,2026-04-15,12,,,,"Nazareth",909-828-4888,,,,,2026-06-01
-4256-0020,Vacant,Upland,280 W Amber Ct,#20,Apartment,1,1,,1950,1800,2026-04-01,12,,,,"Nazareth",909-828-4888,,,,,2026-06-01
-0999-0003,Vacant,Chino,13250 Monte Vista Ave,#3,,1,1,,2100,1800,2026-05-27,12,,,,,,,,,,2026-06-01
-2530-0001,Working On,Ontario,1903 E Deodar St.,,House,3,1,1160,3895,3500,2026-04-23,12,,,,,,,,,Credit approved 2026-05-22,2026-06-01
-0215-0012,Vacant,Montclair,4220 Kingsley Ave.,#b,Apartment,2,2,,2300,2000,2026-06-01,12,,,,"Silvia",909-821-6007,,,,,2026-06-01
-0456-0009,Vacant,Ontario,1145 W. 1 St.,#9,Apartment,1,1,,1850,1500,2026-06-01,12,,,,"Olga",909-634-7186,,,,,2026-06-01
-0458-0004,Vacant,Montclair,4810 Bandera St.,#d,Apartment,2,1,,2250,2000,2026-06-01,12,,,,"Pablo",909-915-5935,,,,,2026-06-01
-0458-0010,Vacant,Montclair,4810 Bandera St.,#j,Apartment,2,1,,2200,1000,2026-06-01,12,,,,"Pablo",909-915-5935,,,,,2026-06-01
-0458-0029,Vacant,Montclair,4850 Bandera St.,#a,Apartment,2,1,,2200,2100,2026-06-01,12,,,,"Pablo",909-915-5935,,,,,2026-06-01
-0500-0020,Vacant,Ontario,1348 E. Nocta St.,#008,Apartment,2,2,,2400,2200,2026-05-01,12,,,,"Mayra",909-927-0629,,,,Credit approved 2026-05-29,2026-06-01
-0500-0026,Vacant,Ontario,1348 E. Nocta St.,#c06,Apartment,2,2,,2350,1000,2026-06-01,12,,,,"Mayra",909-927-0629,,,,,2026-06-01
-1043-0001,Vacant,Upland,840 N Campus Ave,#a,Apartment,2,1,1047,2400,2100,2026-05-05,12,,,,"Flor",909-734-3485,,,,Credit approved 2026-05-18,2026-06-01
-1043-0011,Vacant,Upland,850 N Campus Ave,#c,Apartment,1,1,741,1850,1800,2026-06-01,12,,,,"Flor",909-734-3485,,,,,2026-06-01
-5846-0021,Vacant,Montclair,5160 Bandera St.,#21,Apartment,2,1,850,2180,2000,2026-06-01,12,,,,"Rayanne",626-689-8071,,,,,2026-06-01
+0012-0055,Vacant,Pomona,883 S. Buena Vista Ave.,#55,Apartment,2,1,,2300,2200,2026-07-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-07-15
+0320-0007,Vacant,Pomona,850 E. Kingsley Ave.,#7A,Apartment,2,2,,2200,2100,2026-07-09,12,No pets allowed,,,Fabiola,909-236-8670,,,,,2026-07-15
+0320-0014,Vacant,Pomona,850 E. Kingsley Ave.,#6B,Apartment,2,2,,2300,2100,2026-07-01,12,No pets allowed,,,Fabiola,909-236-8670,,,,,2026-07-15
+5848-0006,Vacant,Pomona,3844 E. 9th St.,#C,Apartment,1,1,470,1950,1800,2026-07-09,12,No pets allowed,,,Amara,909-727-0172,,,,,2026-07-15
+4256-0004,Vacant,Upland,280 W. Amber Ct.,#4,Apartment,1,1,,1950,1800,2026-07-01,12,No pets allowed,,,Nazareth,909-828-4888,,,,,2026-07-15
+4256-0016,Vacant,Upland,280 W. Amber Ct.,#16,Apartment,1,1,,1950,1800,2026-06-01,12,No pets allowed,,,Nazareth,909-828-4888,,,,,2026-07-15
+4256-0020,Vacant,Upland,280 W. Amber Ct.,#20,Apartment,1,1,,1950,1800,2026-04-01,12,No pets allowed,,,Nazareth,909-828-4888,,,,,2026-07-15
+4256-0031,Vacant,Upland,270 W. Amber Ct.,#31,Studio,,1,,1750,1500,2026-07-01,12,No pets allowed,,,Nazareth,909-828-4888,,,,,2026-07-15
+0235-0009,Vacant,Ontario,506 W. D St.,#1,Apartment,2,1,,2300,2100,2026-07-07,12,No pets allowed,,,Julie,909-684-2685,,,,,2026-07-15
+0435-0021,Vacant,Ontario,1722 E. 4th St.,#A,Apartment,2,1,,2350,2100,2026-07-02,12,No pets allowed,,,Jose,442-264-9326,,,,,2026-07-15
+0456-0036,Vacant,Ontario,1145 W. 1st St.,#36,Apartment,2,1,,2300,2100,2026-07-01,12,No pets allowed,,,Olga,909-634-7186,,,,,2026-07-15
+0458-0032,Vacant,Montclair,4850 Bandera St.,#D,Apartment,2,1,,2300,2100,2026-07-01,12,No pets allowed,,,Pablo,909-918-5935,,,,,2026-07-15
+0500-0033,Vacant,Ontario,1344 E. Nocta St.,#105,Apartment,2,2,,2400,2100,2026-07-01,12,No pets allowed,,,Mayrn,909-927-0629,,,,,2026-07-15
+5846-0008,Vacant,Montclair,5140 Bandera St.,#8,Apartment,2,1,850,2300,2100,2026-07-01,12,No pets allowed,,,Rayanne,626-689-8071,,,,,2026-07-15
+7048-0022,Vacant,Ontario,1027 W. G St.,#11,Apartment,1,1,,1950,1800,2026-07-01,12,No pets allowed,,,Ruby,909-545-1766,,,,,2026-07-15
