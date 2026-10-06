@@ -1,25 +1,32 @@
 listing_id,status,city,address_line1,address_line2,property_type,beds,baths,sqft,rent_usd,deposit_usd,available_date,lease_term_months,pet_policy,parking,utilities_included,contact_name,contact_phone,contact_email,listing_url,photos_url,notes,updated_at
-0012-0005,Vacant,Pomona,883 S. Buena Vista Av,#5,Apartment,2,1,,2200,1900,2026-09-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-09-02
-0012-0041,Vacant,Pomona,883 S. Buena Vista Ave.,#41,Apartment,2,1,,2000,2100,2026-09-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-09-02
-0012-0043,Vacant,Pomona,883 S. Buena Vista Ave.,#43,Apartment,2,1,,1652,700,2026-09-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-09-02
-0012-0053,Vacant,Pomona,883 S. Buena Vista Ave.,#53,Apartment,2,1,,1837,1400,2026-09-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-09-02
-0047-0010,Vacant,Pomona,770 La Mesa St.,,Apartment,2,1,,2200,2000,2026-09-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-09-02
-0592-0001,Vacant,Pomona,1800 W Orange Grove,#1,Apartment,1,1,,1942,1800,2026-09-01,12,No pets allowed,,,Amara,909-727-0172,,,,,2026-09-02
-9049-0006,Vacant,Pomona,655 San Francisco Ave,#F,Apartment,1,1,,1825,1700,2026-09-01,12,No pets allowed,,,Sandra,714-697-8643,,,,,2026-09-02
-4256-0005,Vacant,Upland,280 W Amber Ct,#5,Apartment,1,1,,1950,1800,2026-08-04,12,No pets allowed,,,Nazaret,909-828-4888,,,,,2026-09-02
-4256-0020,Vacant,Upland,280 W Amber Ct,#20,Apartment,1,1,,1950,1800,2026-04-01,12,No pets allowed,,,Nazaret,909-828-4888,,,,,2026-09-02
-9693-0007,Vacant,Pomona,1626 E Kingsley Ave,#7,Apartment,1,1,490,1043,800,2026-08-31,12,No pets allowed,,,Sonia,909-630-4850,,,,,2026-09-02
-3048-0001,Vacant,,525 Geneva Ave,,House,3,2,1181,3500,2500,2026-09-01,12,No pets allowed,,,,,,,,2026-09-02
-9761-0001,Vacant,Pomona,11249 Wesley Ave,,House,4,2,1596,3595,3200,2026-08-28,12,No pets allowed,,,,,,,,2026-09-02
-5731-0001,Vacant,Ontario,11115 S Central Ave,#1,House,2,1,,2250,900,2026-08-24,12,No pets allowed,,,,,,,,2026-09-02
-0261-0026,Vacant,Ontario,1229 E. Elma St.,#b,Apartment,2,1,,2350,1000,2026-09-01,12,No pets allowed,,,Juanita,909-408-9243,,,,,2026-09-02
-0456-0021,Vacant,Ontario,1145 W. I St.,#21,Apartment,,1,,1558,1100,2026-09-01,12,No pets allowed,,,Olga,909-634-7186,,,,,2026-09-02
-0456-0030,Vacant,Ontario,1145 W. I St.,#30,Apartment,2,1,,2200,2200,2026-08-01,12,No pets allowed,,,Olga,909-634-7186,,,,,2026-09-02
-0457-0018,Vacant,Ontario,1161 W I St.,#18,Apartment,3,2,,2600,2300,2026-08-01,12,No pets allowed,,,Olga,909-634-7186,,,,,2026-09-02
-0458-0011,Vacant,Montclair,4810 Bandera St.,#k,Apartment,2,1,,2200,900,2026-09-01,12,No pets allowed,,,Pablo,909-915-5935,,,,,2026-09-02
-0458-0016,Vacant,Montclair,4830 Bandera St.,#b,Apartment,2,1,,2250,900,2026-09-01,12,No pets allowed,,,Pablo,909-915-5935,,,,,2026-09-02
-0500-0022,Vacant,Ontario,1348 E. Nocta St.,#c02,Apartment,2,2,,2350,1400,2026-09-01,12,No pets allowed,,,Mayra,909-927-0629,,,,,2026-09-02
-1031-0001,Vacant,Ontario,560 West Vesta Street,#1,Apartment,1,1,1,1800,1800,2026-09-01,12,No pets allowed,,,Ismael,840-219-7741,,,,,2026-09-02
-4235-0012,Vacant,Upland,279 W. 11Th Street,#204,Apartment,1,1,,1900,2000,2026-09-01,12,No pets allowed,,,Frank,909-657-6651,,,,,2026-09-02
-7047-0003,Vacant,Ontario,121 N Fern Ave,#3,Apartment,1,1,,1950,1800,2026-08-24,12,No pets allowed,,,Jacqueline,909-761-6521,,,,,2026-09-02
-8337-0001,Vacant,Ontario,1541 N Pleasant Ave,,House,3,2,1258,3900,2500,2026-08-03,12,No pets allowed,,,,,,,,2026-09-02
+0012-0005,Vacant,Pomona,883 S. Buena Vista Ave,#5,Apartment,2,1,,2100,1900,2026-09-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-10-06
+0012-0011,Vacant,Pomona,883 S. Buena Vista Ave,#11,Apartment,2,1,,1805,1200,2026-10-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-10-06
+0012-0012,Vacant,Pomona,883 S. Buena Vista Ave,#12,Apartment,2,1,,1585,700,2026-10-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-10-06
+0012-0019,Vacant,Pomona,883 S. Buena Vista Ave,#19,Apartment,2,1,,2100,2100,2026-10-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-10-06
+0012-0043,Vacant,Pomona,883 S. Buena Vista Ave,#43,Apartment,2,1,,2100,1900,2026-09-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-10-06
+0012-0045,Vacant,Pomona,883 S. Buena Vista Ave,#45,Apartment,2,1,,1744,1200,2026-10-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-10-06
+0012-0053,Vacant,Pomona,883 S. Buena Vista Ave,#53,Apartment,2,1,,2100,1900,2026-09-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-10-06
+0084-0005,Vacant,Pomona,677 S. Palomares St,#1,Apartment,2,1,,2100,700,2026-10-01,12,No pets allowed,,,Gloria,909-670-9171,,,,,2026-10-06
+0085-0002,Vacant,Pomona,694 N Park Ave,#101,Apartment,2,1,,2080,2200,2026-10-01,12,No pets allowed,,,Lucy Icccilia,626-606-4696,,,,,2026-10-06
+0085-0005,Vacant,Pomona,694 N Park Ave,#104,Apartment,1,1,,1775,1800,2026-10-01,12,No pets allowed,,,Luzma Edith,626-606-4079,,,,,2026-10-06
+0216-0001,Vacant,Pomona,1614 Kingsley Ave,#1,Apartment,1,1,,1725,1800,2026-10-01,12,No pets allowed,,,Luzma Edith,626-606-4079,,,,,2026-10-06
+0320-0080,Vacant,Pomona,720 N San Antonio Ave,#10M,Apartment,1,1,,1825,1800,2026-10-01,12,No pets allowed,,,Sonia,909-630-4850,,,,,2026-10-06
+0334-0004,Vacant,Pomona,1640 Kingsley Ave,#4,Apartment,1,1,,1775,1800,2026-10-01,12,No pets allowed,,,Fabiola,909-236-8670,,,,,2026-10-06
+0335-0012,Vacant,Pomona,1641 E Kingsley Ave,#12,Apartment,1,1,,1850,1800,2026-10-01,12,No pets allowed,,,Sonia,909-630-4850,,,,,2026-10-06
+0335-0015,Vacant,Pomona,1641 E Kingsley Ave,#15,Apartment,2,1,,2300,2100,2026-09-03,12,No pets allowed,,,Guadalupe,909-326-9167,,,,,2026-10-06
+0335-0018,Vacant,Pomona,1641 E Kingsley Ave,#18,Apartment,1,1,,1750,1400,2026-10-01,12,No pets allowed,,,Guadalupe,909-326-9167,,,,,2026-10-06
+0335-0019,Vacant,Pomona,1641 E Kingsley Ave,#19,Apartment,1,1,,1556,1000,2026-10-01,12,No pets allowed,,,Guadalupe,909-326-9167,,,,,2026-10-06
+0451-0012,Vacant,Pomona,1638 Kingsley Ave,#12,Apartment,1,1,,1775,1800,2026-10-01,12,No pets allowed,,,Guadalupe,909-326-9167,,,,,2026-10-06
+0592-0019,Vacant,Pomona,1800 W Orange Grove,#19,Apartment,1,1,,1556,1000,2026-10-01,12,No pets allowed,,,Sonia,909-630-4850,,,,,2026-10-06
+0592-0024,Vacant,Pomona,1800 W Orange Grove,#24,Apartment,2,1,,1652,900,2026-10-01,12,No pets allowed,,,Sandra,714-697-8643,,,,,2026-10-06
+0952-0003,Vacant,Pomona,773 W 8Th St,,Apartment,3,2,,3300,2100,2026-10-01,12,No pets allowed,,,Sandra,714-697-8643,,,,,2026-10-06
+7018-0004,Vacant,Pomona,1107 N Park Ave,,Apartment,1,1,,1750,1800,2026-10-01,12,No pets allowed,,,Alicia,909-810-3018,,,,,2026-10-06
+4256-0003,Vacant,Upland,280 W Amber Ct,#3,Apartment,1,1,,1850,1800,2026-09-04,12,No pets allowed,,,Nazareth,909-828-4888,,,,,2026-10-06
+4256-0005,Vacant,Upland,280 W Amber Ct,#5,Apartment,1,1,,1950,1800,2026-08-04,12,No pets allowed,,,Nazareth,909-828-4888,,,,,2026-10-06
+4256-0020,Vacant,Upland,280 W Amber Ct,#20,Apartment,1,1,,1950,1800,2026-04-01,12,No pets allowed,,,Nazareth,909-828-4888,,,,,2026-10-06
+4256-0021,Vacant,Upland,280 W Amber Ct,#21,Apartment,2,1,,2300,2100,2026-09-23,12,No pets allowed,,,Nazareth,909-828-4888,,,,,2026-10-06
+9761-0001,Vacant,Pomona,11249 Wesley Ave,,House,4,2,1596,3595,3200,2026-08-28,12,No pets allowed,,,,,,,,,2026-10-06
+0215-0002,Vacant,Montclair,4200 Kingsley Ave,#6,Apartment,2,2,,2254,800,2026-10-01,12,No pets allowed,,,Silvia,909-821-6007,,,,,2026-10-06
+0456-0021,Vacant,Ontario,1145 W. 1St.,#21,Apartment,5,1,,1950,1800,2026-09-01,12,No pets allowed,,,Ruby,909-545-1766,,,,,2026-10-06
+0456-0031,Vacant,Ontario,1145 W. 1St.,#31,Apartment,2,1,,2200,600,2026-10-01,12,No pets allowed,,,Olga,909-634-7186,,,,,2026-10-06
+0456-0040,Vacant,Ontario,1145 W. 1St.,#40,Apartment,1,1,,1900,1800,2026-09-21,12,No pets allowed,,,Olga,909-634-7186,,,,,2026-10-06
